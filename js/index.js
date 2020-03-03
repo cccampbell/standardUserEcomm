@@ -34,21 +34,29 @@ function logInUser(form) {
         //check whether what was passed starts with 'null'
         let check = xhr.responseText.slice(0,4);
         let account_menu = document.getElementById('account_menu');
+
         if(check === 'null') {
           console.log("2");
           document.getElementById('login_error').innerHTML = 'no email / password match';
           account_menu.classList.toggle('login_error');
+
         } else {
+
           console.log("3");
           setTimeout(() => {
+
             if (account_menu.classList.contains('login_error') === true) {
               account_menu.classList.toggle('login_error');
+
             } else {
+
               //method to add html to #nav_entry // for now
               document.getElementById("account_btn").innerHTML = '<a href="#"><i class="fi-list"></i><span>'+ xhr.responseText +'</span></a>';
               document.getElementById('active_login').classList.add('logged_in');
               account_menu.classList.toggle("entry_show");
+
               setTimeout(() => {
+
                 document.getElementById('nav_entry').innerHTML = '<input class="button expanded" type="submit" value="Log out" name="log_out_user">';  
               }, 250);
               
@@ -344,21 +352,21 @@ var k_f_title = document.getElementsByClassName('key_feature_title_wrapper');
 
   const email_input = document.getElementById('login_email');
   const pass_input = document.getElementById('login_pass');
+
   if(email_input) {
+
     let btn = document.getElementById('login_btn')
+
     email_input.addEventListener('change', () => {
-      if (!email_input.checkValidity() || !pass_input.checkValidity()) {
-        btn.onclick = () => {return false};
-        btn.classList.add('hidden_login_btn');
-        console.log('locked');
-      } else {
-        console.log('unlocked');
+
+      if (email_input.validity.valid && !pass_input.validity.valid) {
         if (btn.classList.contains('hidden_login_btn') === true) {
+
           btn.classList.remove('hidden_login_btn');
         }
-        
-        btn.onclick = () =>{logInUser(this)};
-      } 
+
+        btn.onclick = () => { logInUser(this) };
+      }
     })
 }
 

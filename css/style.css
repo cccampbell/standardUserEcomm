@@ -162,7 +162,7 @@ body {
   text-transform: uppercase;
 }
 
-.login_error form .floated-laabel-wrapper label .login_input {
+.login_error form .floated-label-wrapper label .login_input {
   border: 1px solid red !important;
 }
 
@@ -267,6 +267,23 @@ body {
 
 #basket #basket_to_payment_btn a {
   color: white !important;
+}
+
+#basket p {
+  margin: 1em auto 0;
+  text-align: cemter;
+  font-size: calc(14px + 4 * ((100vw - 320px) / 680));
+}
+
+#basket #basket_nav_empty {
+  border-color: #1779ba;
+  background-color: white;
+  color: #1779ba;
+  opacity: 0.7;
+  width: 90%;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
 }
 
 #basket .basket_item {
