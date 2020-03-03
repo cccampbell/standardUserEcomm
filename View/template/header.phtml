@@ -189,9 +189,12 @@
         }
       }
       ?>
+      <?php if( count($_SESSION['basket']) == 0) : ?>
+      <p>basket empty</p>
+      <div class="button" id="basket_nav_empty">go to basket</div>
+      <?php else : ?>
       <div class="button" id="basket_to_payment_btn"><a href="../basket.php">go to basket</a></div>
-
-
+      <?php endif; ?>
     </div>
   </div>
 
