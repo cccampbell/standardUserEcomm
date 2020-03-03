@@ -50,7 +50,8 @@ if(empty($_SESSION['basket'])) {
             </div>
 
           </div>
-          </div>';
+          </div>
+          <div class="button nav_basket_btn" id="basket_to_payment_btn"><a href="../basket.php">go to basket</a></div>';
 
     array_push($_SESSION['basket'], $product);
     

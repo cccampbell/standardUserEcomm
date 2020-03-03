@@ -22,7 +22,7 @@ foreach($_SESSION['basket'] as $basket_item ) {
 
 
 
-// session_destroy();
+session_destroy();
 
 
 require_once('View/basket.phtml');

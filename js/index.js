@@ -102,6 +102,11 @@ function addToBasket(form) {
       // checks status successful return
       if(xhr.status == 200) {
 
+        // CHECK IF BASKET IS ACTING EMPTY
+        if (document.getElementById('basket_nav_empty')) {
+          // REMOVE EMPTY BASKET ELEMENTS
+          document.getElementById('basket').innerHTML = '';
+        }
         document.getElementById('basket').innerHTML += xhr.responseText;
         console.log(xhr.responseText);
 
