@@ -1,0 +1,63 @@
+<?php require_once('template/header.phtml') ?>
+
+<!-- HERO IMG GOES HERE -->
+<div id="collection_hero_img">
+    <h3><?php echo $view->collection['img'] ?></h3>
+    <h5><?php echo $view->collection['name'] ?></h5>
+</div>
+
+<!-- BLURB OF COLLECTION GOES HERE -->
+<div id="blurb_wrapper">
+  <h3><?php echo $view->collection['blurb'] ?></h3>
+</div>
+
+<div class="" id="products_wrap">
+
+    <div class="products_row grid-x grid-margin-x">
+
+    <?php foreach ($view->collectionProducts as $product) {
+        //get colors in multi-dim array 'color' 'color-code'
+
+        $stock = $ProductDS->getProductSizeQuantity($product->getProductId());
+
+        // GETTING THE FIRST COLOUR OF PRODUCT (AS DEFAULT)
+        $first = reset($stock);
+
+        // var_dump($first);
+
+        echo '<div class="cell small-6 large-3 product">
+          <a href="/product.php?prodid='. $product->getProductId() .'&prodname='. $product->getProductName() .'&colour='. $first['id'] .'">
+            <div class="product_thumbnail">
+              <img src="/img/'.$product->getProductImg().'" class="prod_img">
+            </div>
+            <div class="prod_info">
+              <div class="prod_card_info grid-x">
+                <div class="prod_info_left cell small-9">
+                  <h3 class="prod_name">'.$product->getProductName().'</h3>
+                  <div class="prod_colors">';
+                  
+                  foreach($stock as $color) {
+
+
+                    echo '<div value="'.$color['id'].'" class="color_of_product" style="background-color:#'. $color['hex_code'] .'"></div>';
+
+                  };
+                    
+                    echo '</div>
+                </div>
+
+                <h4 class="prod_price small-3">£'. $product->getProductPrice() .'</h4>
+              </div>
+
+
+
+            </div>
+          </a>
+        </div>';
+      } ?> 
+
+
+    </div>
+  </div>
+
+<?php require_once('template/footer.phtml') ?>

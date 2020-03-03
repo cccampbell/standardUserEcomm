@@ -1,0 +1,290 @@
+#basket_body
+  margin: 10vh 0 0 0
+  padding-top: 5em
+  display: flex
+  flex-direction: column
+  background-color: $white_blue
+  box-shadow: 0 0 0 100vw $white_blue
+  font-family: Roboto, Sans-Serif
+  // border: $dark_border
+  width: 66.6%
+  h1
+    margin: 0 auto 2em
+
+#basket_wrapper
+  // border: 1px solid black
+  margin: 0
+  display: flex
+  padding: 0
+  justify-content: center
+  // box-shadow: -20em 0 0 90em lightgrey
+  // background-color: white
+  .basket_item_wrapper
+    border: 1px solid gray
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    background-color: white
+    margin: 0 auto
+    width: 40em
+    position: relative
+    img
+      // margin: 1em 1em
+      padding: 1.25em
+    #basket_item_info
+      padding: 0.5em
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      position: relative
+      width: 100%
+      &::before
+        // content: ""
+        // height: 80%
+        // border-left: 1px solid grey
+        // position: absolute
+        // left: -0.5em
+        // align-self: center
+        // top: 11%
+
+      .item_essential_info
+        display: flex
+        flex-direction: column
+        position: relative
+        // padding-bottom: 0.5em
+        &::after
+          // content: ""
+          // border-bottom: 1px solid black
+          // position: absolute
+          // bottom: 0
+          // width: 50%
+      h4
+        font-size: calc(12px + 4 * ((100vw - 320px) / 680))
+      h2
+        font-size: calc(15px + 3 * ((100vw - 320px) / 680))
+        // font-weight: bold
+        margin-top: 0.5em
+
+      #basket_chosen_details
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        // border: $dark_border
+        width: 100%
+        div
+          display: flex
+          flex-direction: row
+          flex-wrap: wrap
+          align-items: center
+          margin: 0
+          padding-right: 2em
+          width: 45%
+          border-bottom: $light_border
+          justify-content: space-between
+          // margin-right: 1em
+          transition: $transition
+          &:hover
+            border-color: $success
+          span
+            // margin-right: 1em
+            // font-size: 10px
+            font-size: calc(10px + 2 * ((100vw - 320px) / 680))
+          select
+            align-self: center
+            margin: 0
+            border: none
+            border-bottom: 1px solid $btn_color
+            width: 5em
+            box-shadow: none
+        .basket_item_quantity
+          div
+            width: 100%
+            justify-content: space-between
+            flex-direction: row
+            flex-wrap: nowrap
+            select
+              border-bottom: none
+
+
+      .remove_b_item
+        position: absolute
+        top: 0
+        right: 0
+        font-size: 18px
+        background-color: rgba(0, 0, 0, 0) !important
+        &:focus
+          background-image: none;
+          outline: 0;
+          box-shadow: none;
+
+#basket_checkout
+  position: fixed
+  right: 1em
+  // height: 60%
+  background-color: white
+  border: 1px solid grey
+  padding: 2em
+  width: 27em
+  #basket_total
+    display: flex
+    position: relative
+    width: 100%
+    flex-direction: column
+    align-items: center
+    text-align: left
+    div
+      font-size: 14px
+      border-bottom: $light_border
+      width: 100%
+      // text-align: center
+      padding: 0.5em
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: space-between
+      margin-top: 1em
+      p
+        margin-bottom: 0
+    #checkout_total
+      font-size: 16px
+      text-transform: uppercase
+      font-weight: 700
+      border: none
+  #payment_btns_wrapper
+    // border: 1px solid black
+    display: flex
+    flex-direction: column
+    // position: absolute
+    // bottom: 1em
+    width: 100%
+    // left: 1em
+    // right: 1em
+    .payment_btn
+      display: flex
+      position: relative
+      width: 100%
+      // border: 1px solid black
+      align-items: center
+      align-content: center
+      padding: 1em
+      justify-content: center
+      margin-top: 0.5em
+
+      p
+        margin: 0
+        padding: 0
+        margin-right: 1em
+        text-transform: uppercase
+        font-size: calc(13px + 4 * ((100vw - 320px) / 680)) !important
+      svg
+        font-size: calc(23px + 17 * ((100vw - 320px) / 680))
+        margin-right: 0.2em
+    #paypal_payment_btn
+      background-color: #3b7bbf
+      svg
+        color: white
+    #apple_payment_btn
+      background-color: #F9F6EF
+    #card_payment_btn
+      border: 1px solid $smoke_white
+
+// // DESKTOP 1020
+@media screen and (max-width: $break-desktop)
+  #basket_wrapper
+    display: flex
+    justify-content: flex-start
+    .basket_item_wrapper
+      margin: 0 auto !important
+      width: 40em
+  #basket_checkout
+    width: 30%
+
+// TABLET 768
+@media screen and (max-width: 780px)
+  #basket_body
+    width: 90%
+    margin: 10vh auto 0
+    #basket_wrapper
+      width: 100%
+      justify-content: center
+      margin-bottom: 5em
+      .basket_item_wrapper
+        width: 40em
+        max-width: 100%
+        margin: 1.5em auto
+    #basket_checkout
+      width: 42em
+      max-width: 100%
+      position: relative
+      margin: 0 auto
+      right: 0
+
+
+
+
+// // MOBILE
+@media screen and (max-width: $break-phablet)
+
+  #basket_wrapper
+    width: 100%
+    justify-content: center
+    .basket_item_wrapper
+      width: 90%
+      margin: 1.5em auto
+
+  #basket_checkout
+    position: relative
+    width: 100%
+    right: 0
+
+//   .basket_item_wrapper
+//     margin: 1em 0 1em 0 !important
+//     // flex: 1 0 !important
+//     img
+//       height: 50%
+//       margin: 0 !important
+//       width: 40% !important
+//     #basket_item_info
+//       flex-direction: column
+//       width: 50% !important
+//       &::before
+//         height: 40% !important
+//       .item_essential_info
+//         width: 80%
+//         h2
+//           // font-size: 14px !important
+//         h4
+//           // font-size: 12px !important
+//         &::after
+//           display: none
+//       #basket_chosen_details
+//         flex-direction: row !important
+//         flex-wrap: wrap !important
+//         min-height: auto !important
+//         width: 200%
+//         margin-left: -95%
+//         margin-top: 2em
+//         div
+//           margin-right: 0
+//           justify-content: space-between
+//           padding: 0.5em 0 !important
+//           border-bottom: $light_border
+//           font-size: 20px
+//           width: 50%
+//           margin: 0 !important
+//         .remove_b_item
+//           right: -1em
+//         .basket_item_quantity
+//           border-bottom: none
+//           padding-top: 0.1em !important
+//           padding-bottom: 0 !important
+//           div
+//             border-bottom: none
+//             justify-content: space-between
+//             width: 100%
+//             margin-right: 0 !important
+            
+
+
+
+

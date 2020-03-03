@@ -1,0 +1,66 @@
+body
+  overflow-x: hidden
+  font-family: Roboto, Sans-Serif
+  width: 100vw
+  height: 100vw
+  overflow-x: hidden
+
+.body_container
+  width: 85vw
+  margin: 10vw auto 0
+  z-index: 10
+  overflow: hidden
+
+.sticky_bottom_bar
+  position: fixed
+  display: flex
+  bottom: 0
+  width: 100vw
+  height: 7vh
+  border-top: 1px solid grey
+  justify-content: space-between
+  align-items: center
+  background-color: white
+
+.pane
+  position: fixed
+  display: flex
+  left: -81vw
+  opacity: 0
+  background-color: white
+  border: $dark_border
+  flex-direction: column
+  padding: 1em
+  transition: $transition
+  .pane_header
+    padding-bottom: 0.5em
+    border-bottom: $dark_border
+    margin-bottom: 2em
+  .pane_btns_wrapper
+    position: absolute
+    width: 90%
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-self: center
+    bottom: 1em
+    &::after
+      content: ''
+      width: 111.5%
+      left: -5.75%
+      border-top: $dark_border
+      position: absolute
+    .pane_btn
+      margin-top: 1em
+      width: 45%
+      border: $dark_border
+      text-align: center
+      padding: 0.6em
+      transition: $transition
+      cursor: pointer
+      &:hover
+        background-color: black
+        color: white
+  input
+    margin: 0

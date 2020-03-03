@@ -1,0 +1,217 @@
+#products_wrap
+  //border: 1px dashed grey
+  margin: 14vh auto 0
+  width: 90vw
+  .products_row
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+  .product
+    display: flex
+    flex-direction: column
+    border: 1.25px solid grey
+    position: relative
+    margin-bottom: 2em
+    float: left
+    &:hover
+      border: 1.25px solid black
+      .prod_info
+        .prod_card_left
+          .prod_name
+            transition: all ease-in-out 0.4s
+          .prod_colors
+            opacity: 1
+            margin-bottom: 0
+            transition: all ease-in-out 0.4s
+    .product_thumbnail
+      border-bottom: 1px solid grey
+      display: flex
+      justify-content: center
+      width: 100%
+      padding-top: 12px / 9px * 100%
+      position: relative
+      overflow: hidden
+      .prod_img
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        width: 99%
+
+
+    .prod_info
+      width: 100%
+      display: flex
+      flex-direction: column
+      text-align: center
+      //margin: 0 auto 1em
+      // border-bottom: 1px solid grey
+      //background-color: pink
+      padding: 0.5em 0
+      // border: 1px solid black
+      .prod_card_info
+        display: flex
+        flex-direction: row
+        margin-bottom: 0
+        height: 100%
+        color: black
+        text-transform: uppercase
+        // border: 1px solid black
+        .prod_info_left
+          .prod_name
+            font-size: 12px
+            display: block
+            margin-bottom: 0.5em
+            transition: all ease-in-out 0.25s
+            align-self: center
+            // background-color: pink
+            text-align: left
+            padding-left: 0.5em
+            @media screen and (max-width: $break-phablet)
+              font-size: calc(10px + 6 * ((100vw - 320px) / 680))
+          .prod_colors
+            // transition: all ease-in-out 0.15s
+            display: flex
+            // margin-bottom: -0.5em
+            opacity: 1
+            width: auto
+            justify-content: flex-start
+            // border: 1px solid grey
+            margin-bottom: 0.5em
+            .color_of_product
+              height: 1em
+              width: 1em
+              border: 1px solid black
+              // border-radius: 50%
+              margin-left : 0.5em
+        .prod_price
+          font-size: 20px
+          border-left: 2px solid black
+          height: 100%
+          color: black
+          // border: 1px solid black
+          align-self: center
+          @media screen and (max-width: $break-phablet)
+            font-size: calc(15px + 6 * ((100vw - 320px) / 680))
+
+#shop_filter_bar
+  padding: 1em 1em
+  // background-color: white
+  // border: 1px solid black
+  position: fixed
+  bottom: 0
+  left: 0
+  display: flex
+  align-items: center
+  justify-content: space-between
+  flex-direction: row
+  flex-wrap: nowrap
+  opacity: 0.5
+  transition: $transition
+  &:hover
+    opacity: 1
+  .filter_sort_btns
+    border: 1px solid black
+    padding: 0.5em 3em
+    margin: 0 0.5em
+    cursor: pointer
+    transition: $transition
+    &:hover
+      background-color: black
+      color: white
+
+#sort_pane
+  opacity: 0
+  width: 30vw
+  bottom: 10vh
+  top: auto
+  .pane_header
+    margin-bottom: 1em
+  #pane_btns_wrapper
+    position: relative
+    margin-top: 0
+    padding-top: 0
+    flex-wrap: wrap
+    &::after
+      border: none !important
+
+
+#filter_pane
+  height: 80vh
+  width: 30vw
+  top: 11.5vh
+  .filter_pane_group_wrapper
+    margin-bottom: 2em
+    div
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: space-between
+      &:hover
+        p
+          opacity: 1
+          cursor: pointer
+      p
+        color: black
+        opacity: 0.7
+      div
+        display: flex
+        align-items: center
+        .filter_input
+          
+      .selected_category
+        opacity: 1
+        
+
+// SORT RADIO BTNS
+.sort_btns
+  position: relative
+  &:hover
+    .sort_btn_label
+      color: white
+  .radio_sort
+    opacity: 0.01
+  .sort_btn_label
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: 0
+
+
+
+// MOBILE
+
+
+@media screen and (max-width: $break-phablet)
+  #shop_filter_bar
+    opacity: 1
+    .filter_sort_btns
+      background-color: white
+
+  #products_wrap
+    .products_row
+    .product
+      .product_thumbnail
+      .prod_info
+        .prod_card_info
+          flex-direction: column !important
+          .prod_info_left
+            width: 100% !important
+            .prod_name
+            .prod_colors
+              .color_of_product
+          .prod_price
+            width: 40% !important
+            padding-top: 0.25em
+            margin-top: 0.25em
+            text-align: left
+            margin-bottom: 0
+            border-top: 1px solid black
+            margin-left: 0.35em
+            border-left: none
+            align-self: flex-start

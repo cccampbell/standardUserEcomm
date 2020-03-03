@@ -1,0 +1,158 @@
+#account_menu
+  position: absolute
+  opacity: 0
+  display: none
+  top: 11vh
+  right: -100vw
+  transition: all ease-in-out 0.5s
+  z-index: -50
+  form
+    h2
+      font-size: 20px
+    .floated-label-wrapper
+      label
+      .login_input
+        border: none  
+        border: 1px solid $light_grey
+        box-shadow: none
+        transition: $transition
+        &:focus
+          // border-bottom: 2px solid $btn_color !important
+          &:invalid
+            border: 1px solid red
+          &:valid
+            border: 1px solid $success
+
+    #login_error_box
+      display: none
+      #login_error
+        display: none
+        color: red
+        text-transform: uppercase
+
+.login_error
+  form
+    h2
+    .floated-laabel-wrapper
+      label
+        .login_input
+          border: 1px solid red !important
+    #login_error_box
+      display: flex !important
+      #login_error
+        display: flex !important
+          
+          
+
+.floated-label-wrapper
+  position: relative
+  label
+    background: #fefefe
+    color: #1779ba
+    font-size: 0.75rem
+    font-weight: 600
+    opacity: 0
+    transition: all 0.15s ease-in
+    z-index: -1
+    input
+      &[type=text], &[type=email], &[type=password]
+        border-radius: 4px
+        font-size: 1.75em
+        padding: 0.5em
+    &.show
+      opacity: 1
+      top: -0.85rem
+      z-index: 1
+      transition: all 0.15s ease-in
+
+#login_error_box
+  border: 1px solid red
+  display: flex
+  justify-content: center
+  margin-bottom: -1em
+  p
+    text-align: center
+    align-self: center
+    height: auto
+    margin: 0.5em auto
+.hidden_login_btn
+  color: rgba(191, 191, 191, 0.6) !important
+  border-color: rgba(191, 191, 191, 0.6) !important
+  background-color: white !important
+  &:hover
+    color: rgba(191, 191, 191, 0.6) !important
+    border-color: rgba(191, 191, 191, 0.6) !important
+    background-color: white !important
+#login_btn
+  margin: 2.5rem 0 0.5rem
+  background-color: white
+  color: black
+  border: 1px solid rgba(0, 0, 0, 0.5)
+  transition: $transition
+  &:hover
+    background-color: black
+    color: white
+
+
+#basket
+  display: none
+  opacity: 0
+  position: fixed
+  right: -100vw
+  top: 11vh
+  border: 1px solid black
+  flex-direction: column
+  align-items: center
+  margin: 0
+  padding: 0
+  border: 1px solid black
+  background-color: white
+  transition: all ease-in-out 0.5s
+  z-index: -5
+  padding-bottom: 5em
+  #basket_to_payment_btn
+    width: 90%
+    text-transform: uppercase
+    position: absolute
+    bottom: 0
+    a
+      color: white !important
+  .basket_item
+    //background-color: pink
+    width: 90%
+    display: flex
+    padding: 0.5em
+    flex-direction: row
+    justify-content: space-between
+    margin: 0.7em
+    border: 1px solid black
+    .bitem_info
+      display: flex
+      position: relative
+      flex-direction: column
+      width: 70%
+      align-content: space-between
+      justify-content: space-evenly
+      .bitem_name
+        text-align: center
+        margin-top: 0.25em
+      .bitem_selected
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+        .item_size
+
+    img
+      width: 30%
+      //border: 1px solid grey
+      height: auto
+      max-height: 92px
+    .basket_cross
+      float: right
+      z-index: 55
+      &:hover
+        cursor: pointer
+
+
+// MOBILE 
+
