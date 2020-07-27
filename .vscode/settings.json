@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "work",
+            "dialect": "MySQL",
+            "name": "user_db",
+            "password": "root",
+            "port": 8889,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
