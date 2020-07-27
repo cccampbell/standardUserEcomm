@@ -1,0 +1,49 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+    <div class="" id="products_wrap">
+
+        <div class="products_row grid-x grid-margin-x" id="products_row">
+
+        {% for product in products %}
+
+            <div class="cell small-6 large-3 product">
+            <a href="{{ url_for('product.show', { slug:product.getSlug }) }}">
+
+            <div class="product_thumbnail">
+              <img src="/../../img/{{ product.getImg }}" class="prod_img">
+
+                {% if product.getStockTotal < 50 %}
+                <div class="product_thumbnail_alert">{{ product.checkTotalStock }}</div>
+                {% endif %}
+            </div>
+
+            <div class="prod_info">
+
+              <div class="prod_card_info grid-x">
+                <div class="prod_info_left cell small-9">
+                  <h3 class="prod_name">{{ product.getName }}</h3>
+                  <div class="prod_colors">
+                      <div value="{{ product.getColourId }}" class="color_of_product" style="background-color:#{{ product.getColourHex }}"></div>
+                   </div>
+                </div>
+
+                <h4 class="prod_price small-3">£{{product.getPrice}}</h4>
+              </div>
+
+            </div>
+
+          </a>
+        </div>
+
+        {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% include 'layouts/partials/filterAndSort.twig' %}
+
+
+{% endblock %}

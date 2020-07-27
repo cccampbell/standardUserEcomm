@@ -1,0 +1,120 @@
+{% set cats = app.getAllCategories %}
+
+<div class="grid-x" id="shop_filter_bar">
+      <h5 class="filter_sort_btns" id="filter_products_btn" onclick="toggleFilterPane()">filter</h4>
+      <h5 class="filter_sort_btns" id="sort_products_btn"onclick="toggleSortPane()">sort</h5>
+  </div>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+ 
+  <div class="pane" id="sort_pane">
+      <h4 class="pane_header">sort</h4>
+
+        <div class="pane_btns_wrapper" id="pane_btns_wrapper">
+
+        {% set sort_arr = ['high', 'low', 'new'] %}
+
+        {% for sort in sort_arr %}
+
+          <div class="pane_btn sort_btns" name="sort_{{ sort }}"> 
+            <input id="sort_{{ sort }}" name="sort" value="{{ sort }}" type="radio" class="radio_sort">
+            <label for="sort_{{ sort }}" class="sort_btn_label">{{ sort }}<i class="fas fa-arrow-down"></i></label>
+          </div>
+
+        {% endfor %}
+        </div>
+  </div>
+
+  <div id="filter_pane" class="pane">
+    <div id="filter_wrapper">
+     
+      <div class="filter_section_wrapper">
+
+        <div onclick="toggleSelectedFilter(this)" class="pane_header">
+          <h4>collections<h4>
+          <i class="fas fa-plus"></i>
+        </div>
+          <!-- COLLECTIONS -->
+        <div class="filter_pane_group_wrapper" id="collection_filter_wrapper">
+
+          {% for collection in cats['collection'] %}
+
+            {% if collection.slug == args['slug'] %}
+
+                {# DON'T WANT IT ON PAGE AS YOU DON'T #}
+              
+            {% else %}
+                {# IF CHECKBOX SAME AS FILTER CHECK IT #}
+              {% if collection.slug in filters %}
+
+                <div>
+                  <div>
+                    <input checked type="checkbox" class="filter_input" value="{{ collection.slug }}" name="checkbox_filter[]">
+                      <label>{{ collection.name }}</label>
+                      </div>
+                    </input>
+                  <p>({{ collection.count }})</p>
+                </div>
+                
+              {% else %}
+
+                <div><div><input type="checkbox" class="filter_input" value="{{ collection.slug }}" name="checkbox_filter[]"><label>{{ collection.name }}</label></div></input><p>({{ collection.count }})</p></div>
+              
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+
+      <div class="filter_wrapper">
+
+        <div onclick="toggleSelectedFilter(this)" class="pane_header">
+          <h4>categories<h4>
+          <i class="fas fa-plus"></i>
+        </div>
+          <!-- CATEGORIES -->
+        <div class="filter_pane_group_wrapper" id="category_filter_wrapper">
+
+            {% for category in cats['category'] %}
+
+              {% if category.slug == args['slug'] %}
+
+                {# DON'T WANT IT ON PAGE AS YOU DON'T #}
+              
+              {% else %}
+                {# IF CHECKBOX SAME AS FILTER CHECK IT #}
+                {% if category.slug in filters %}
+
+                  <div><div><input checked type="checkbox" class="filter_input" value="{{ category.slug }}" name="checkbox_filter[]"><label>{{ category.name }}</label></div></input><p>({{ category.count }})</p></div>
+                
+                {% else %}
+
+                  <div><div><input type="checkbox" class="filter_input" value="{{ category.slug }}" name="checkbox_filter[]"><label>{{ category.name }}</label></div></input><p>({{ category.count }})</p></div>
+              
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <p id="total_filter_count">Total: <strong>{{count}}</strong></p>
+
+  </div>
+
+  <div id="filter_btns" class="pane_btns_wrapper">
+          
+    <div class="pane_btn">
+      <a id="clear_filter" href="{{url_for('product.showAll')}}">clear</a>
+    </div>
+    <div name="submit_filter" class="pane_btn" onclick="selectedFilters()">
+      <p>apply</p>
+    </div>
+          
+  </div>
+
+  </form>
+  </div>
+  </form>

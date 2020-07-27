@@ -1,0 +1,173 @@
+<?php require_once('template/header.phtml') ?>
+
+<div class="grid-x" id="product_page_hero">
+
+  <div id="active_img_wrap" class="cell medium-10 large-auto product_page_img">
+    <img id"active_img" src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+  </div>
+
+  <div id="product_carousel_wrap" class="grid-x medium-10 large-3 ">
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>
+
+<div class="grid-x grid-margin-x body_container" id="product_container">
+  <div class="grid-x grid-margin-x cell large-12" id="product_page_info">
+
+    <div class="cell large-6" id="info_left">
+      <div>
+        <h2><?php echo $selected_product->getProductName() ?></h2>
+        <h4>£<?php echo $selected_product->getProductPrice()?></h4>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+    </div>
+    <div class="cell large-6 grid-x grid-margin-x" id="info_right">
+
+      <div class="product_info cell large-12" id="product_key_features">
+        <div class="key_feature_title_wrapper">
+          <i class="fas fa-angle-down product_info_arrow"></i>
+          <h3>product details</h3>
+        </div>
+          <ul class="product_list">
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+            <li>four</li>
+          </ul>
+      </div>
+      <div class="product_info cell large-12" id="product_care">
+        <div class="key_feature_title_wrapper">
+          <i class="fas fa-angle-down product_info_arrow"></i>
+          <h3>care label</h3>
+        </div>
+          <ul class="product_list">
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+            <li>four</li>
+          </ul>
+      </div>
+      <div class="product_info cell large-12">
+        <div class="key_feature_title_wrapper">
+          <i class="fas fa-angle-down product_info_arrow"></i>
+          <h3>returns</h3>
+        </div>
+          <ul class="product_list">
+            <li>one</li>
+            <li>two</li>
+            <li>three</li>
+            <li>four</li>
+          </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BASKET STUCK TO BOTTOM OF SCREEN -->
+<form action="<?php echo htmlspecialchars($_SESSION['PHP_SELF']); ?>" method="post" class="sticky_basket sticky_bottom_bar grid-x">
+
+
+  <!-- colour-way / size / add to basket -->
+    <div class="float_right" id="basket_selection_wrap">
+
+      <select id="basket_colorway" name="select_colorway">
+        <!-- OPTION FOR EACH COLOUR -->
+         <?php
+          foreach($stock as $color) {
+            if($color['id'] === $_GET['colour']) {
+              echo '<div class="color_selector" style="background-color:# '. $color['hex_colour'] .'"></div><option value="'.$color['id'].'" selected>'. $color['colour_name'] .'</option>';
+            } else {
+              echo '<div class="color_selector" style="background-color:# '. $color['hex_colour'] .'"></div><option value="'.$color['id'].'">'. $color['colour_name'] .'</option>';
+            }
+            
+          }
+        ?>
+        <!-- <option id="active_colorway"></option>
+        <option></option>
+        <option></option> -->
+      </select>
+
+      <select id="basket_size" name="select_size">
+
+          <?php
+            foreach($currentProduct['stock'] as $key => $value) {
+              if($value > 0) {
+                echo '<option>'. $key .'</option>';
+              }
+              
+            }
+          ?>
+
+        <!-- <option>x-small</option>
+        <option>small</option>
+        <option id="active_size">medium</option>
+        <option>large</option>
+        <option>x-large</option> -->
+        
+      </select>
+
+
+  </div>
+
+
+  <div class="product_entry">
+    <?php
+      if($total_stock == 0) {
+        echo '<div class="button footer_stock_warning" id="no_stock_warning">no stock left</div>';
+      } if ($total_stock <= 20) {
+        echo '<div class="button footer_stock_warning" id="last_few_warning">last few in stock</div>';
+      } else {
+      }
+    ?>
+
+    <div value='<?php echo $_GET['prodid']; ?>' class="button extended float-right" id="add_to_basket_btn" name="atb" onclick="addToBasket(this)"><p>Add to Basket</p><p>£<?php echo $selected_product->getProductPrice(); ?></p></div>
+  </div>
+
+</form>
+
+
+
+
+<?php require_once('template/footer.phtml') ?>

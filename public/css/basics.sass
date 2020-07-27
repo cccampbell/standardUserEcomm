@@ -1,0 +1,167 @@
+body
+  overflow-x: hidden
+  font-family: Roboto, Sans-Serif
+  width: 100vw
+  // height: 100vh
+  height: fit-content
+  overflow-x: hidden
+  padding: 0
+  margin: 0
+  background-color: $near_white !important
+.body_container
+  width: 85vw
+  margin: 10vw auto 0
+  z-index: 10
+  overflow: hidden
+
+p
+  font-family: $text_font
+
+// HERO 
+.hero
+  overflow: hidden
+  position: relative
+  background-color: transparent
+  margin: 1em
+  margin-top: 11.4vh
+  width: 100%
+  .hero_img
+    height: 100%
+    width: 100%
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 98
+  .hero_info
+    z-index: 99
+    .hero_cta_btn
+
+.sticky_bottom_bar
+  position: fixed
+  display: flex
+  bottom: 0
+  width: 100vw
+  height: 7vh
+  border-top: 1px solid grey
+  justify-content: space-between
+  align-items: center
+  background-color: white
+
+.button
+  border: 2px solid $primary !important
+  background-color: transparent !important
+  // font-weight: 700
+  color: $primary !important
+  font-size: calc(9px + 2 * ((100vw - 320px) / 680)) !important
+  text-transform: uppercase
+  border-radius: 3px !important
+  padding: 1em 2.5em !important
+  font-weight: bold
+  letter-spacing: 0.5px
+  a
+    color: $primary !important
+    font-weight: bold
+  p
+    color: $primary !important
+    font-weight: bold
+  span
+    color: $primary !important
+    font-weight: bold
+  &::focus
+      outline: none !important
+      outline-style: none !important
+  &:hover
+    background-color: white !important
+    
+button
+  letter-spacing: 0.5px
+  &::focus
+        outline: none !important
+        outline-style: none !important
+// PANE
+.pane
+  position: fixed
+  display: flex
+  left: -81vw
+  opacity: 0
+  background-color: white
+  flex-direction: column
+  padding: 1em
+  transition: $transition
+  border-radius: 3px
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 20%)
+  .pane_header
+    padding-bottom: 0.5em
+    padding-top: 0.5em
+    border-bottom: $dark_border
+    margin-bottom: 2em
+    display: flex
+    flex-wrap: nowrap
+    flex-direction: row
+    justify-content: space-between
+    svg
+      font-size: 14px
+      color: rgba(0, 0, 0, 0.5)
+  #total_filter_count
+    float: right
+    width: 98%
+    text-align: right
+  .pane_btns_wrapper
+    position: absolute
+    width: 90%
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-self: center
+    bottom: 1em
+    &::after
+      content: ''
+      width: 111.5%
+      left: -5.75%
+      border-top: $dark_border
+      position: absolute
+    .pane_btn
+      margin-top: 1em
+      width: 45%
+      border: $dark_border
+      text-align: center
+      padding: 0.6em
+      transition: $transition
+      cursor: pointer
+      position: relative
+      &:hover
+        background-color: black
+        color: white
+      #clear_filter
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        color: black
+  input
+    margin: 0
+
+#account_icon
+  font-size: 16px
+  color: black
+
+details
+  // debug - transition
+  summary
+    outline: 0
+
+// details[open]
+  // summary ~ *
+    // transition: $transition
+// BANNER
+.banner
+  width: 100vw
+  position: relative
+  padding: 4em 12vw
+  margin: 0
+  display: flex

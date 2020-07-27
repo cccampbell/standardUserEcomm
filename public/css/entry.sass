@@ -1,0 +1,216 @@
+#account_menu
+  position: absolute
+  opacity: 0
+  display: none
+  top: 11vh
+  right: -100vw
+  transition: all ease-in-out 0.5s
+  z-index: -50
+  width: calc(27em - 5 * ((100vw + 320px) / 680))
+  form
+    h2
+      font-size: 20px
+      letter-spacing: 0.5px
+      text-transform: uppercase
+      margin-top: 0.5em
+    .floated-label-wrapper
+      margin: 1em auto
+      label
+      .login_input
+        border: 1px solid hsla(0,0%,94%,0.7)
+        background-color: hsla(0,0%,94%,0.4)
+        box-shadow: none
+        border-radius: $box_radius
+        transition: $transition
+        padding: 1.5em 1em 
+        &:focus
+          // border-bottom: 2px solid $btn_color !important
+          &:invalid
+            border: 1px solid red
+          &:valid
+            border: 1px solid $success
+
+    #login_error_box
+      display: none
+      #login_error
+        display: none
+        color: red
+        text-transform: uppercase
+
+.login_error
+  form
+    h2
+    .floated-label-wrapper
+      label
+        .login_input
+          border: 1px solid red !important
+    #login_error_box
+      display: flex !important
+      #login_error
+        display: flex !important
+
+
+#login_signup_breakline
+  // width: 100%
+  // border: 1px solid black
+#signup_btn
+  color: #4f95e2
+  border-color: #4f95e2
+  background-color: white
+  font-size: 12px
+  &:hover
+    background-color: #3988de
+    border-color: #3988de
+    a
+      color: white
+
+          
+          
+
+.floated-label-wrapper
+  position: relative
+  label
+    background: #fefefe
+    color: #1779ba
+    font-size: 0.75rem
+    font-weight: 600
+    opacity: 0
+    transition: all 0.15s ease-in
+    z-index: -1
+    input
+      &[type=text], &[type=email], &[type=password]
+        border-radius: 4px
+        font-size: 1.75em
+        padding: 0.5em
+    &.show
+      opacity: 1
+      top: -0.85rem
+      z-index: 1
+      transition: all 0.15s ease-in
+
+#login_error_box
+  border: 1px solid red
+  display: flex
+  justify-content: center
+  margin-bottom: -1em
+  p
+    text-align: center
+    align-self: center
+    height: auto
+    margin: 0.5em auto
+
+.hidden_login_btn
+  color: rgba(191, 191, 191, 0.6) !important
+  border-color: rgba(191, 191, 191, 0.6) !important
+  background-color: white !important
+  &:hover
+    color: rgba(191, 191, 191, 0.6) !important
+    border-color: rgba(191, 191, 191, 0.6) !important
+    background-color: white !important
+    
+#login_btn
+  margin: 2.5rem 0 0.5rem
+  background-color: white
+  color: #82e665
+  border: 1px solid #82e665
+  transition: $transition
+
+  &:hover
+    background-color: #82e665
+    color: white
+
+
+#basket
+  display: none
+  width: calc(30em - 5 * ((100vw + 320px) / 680))
+  opacity: 0
+  position: fixed
+  right: -100vw
+  top: 11vh
+  flex-direction: column
+  align-items: center
+  margin: 0
+  padding: 1em 0.2em
+  background-color: $near_white
+  border-radius: 3px
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 20%)
+  transition: all ease-in-out 0.5s
+  z-index: -5
+  padding-bottom: 5em
+  #basket_to_payment_btn
+    width: 90%
+    text-transform: uppercase
+    position: absolute
+    bottom: 0
+    border-color: hsla(0,0%,94%,0.9) !important
+    background-color: white !important
+    a
+      letter-spacing: 0.5px 
+  p
+    margin: 1em auto 0
+    text-align: center
+    font-size: calc(14px + 4 * ((100vw - 320px) / 680))
+  #basket_nav_empty
+    border-color: $btn2
+    background-color: white
+    color: $btn2
+    opacity: 0.7
+    width: 90%
+    text-transform: uppercase
+    position: absolute
+    bottom: 0
+  .basket_item
+    //background-color: pink
+    width: 100%
+    a
+      width: 90%
+      display: flex
+      padding: 1em 1em
+      flex-direction: row
+      justify-content: space-between
+      margin: 0.7em auto
+      // border: 1px solid black
+      border: 1px solid hsla(0,0%, 94%, 0.9)
+      background-color: white
+      border-radius: 3px
+      .bitem_info
+        display: flex
+        position: relative
+        flex-direction: column
+        width: 70%
+        align-content: space-between
+        justify-content: space-evenly
+        color: black
+        .bitem_name
+          text-align: center
+          margin-top: 0.25em
+        .bitem_selected
+          display: flex
+          flex-direction: row
+          justify-content: space-around
+          .item_size
+
+      img
+        width: 92px
+        //border: 1px solid grey
+        height: 92px
+        object-fit: contain
+      .basket_cross
+        float: right
+        z-index: 55
+        &:hover
+          cursor: pointer
+
+
+// MOBILE 
+@media screen and (max-width: $break-phablet)
+  #basket
+    min-width: 70vw
+  #account_menu
+    min-width: 70vw
+
+@media screen and (max-width: 328px)
+  #basket
+    width: 95vw
+  #account_menu
+    width: 95vw

@@ -1,0 +1,264 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+
+    <div class="body_container">
+        <form class="grid-x" name="checkout_form" id="checkout_order_form" action="{{ url_for('basket.checkout') }}" method="post">
+
+            <div id="user_order_info_section" class="checkout_section">
+
+                <h2 id="checkout_header" class="checkout_section_header">ORDER INFORMATION</h2>
+
+                <div class="checkout_info_form">
+
+                    <div class="checkout_area cell" id="user_checkout_input">
+                    
+                        <h3 class="checkout_area_header">User Info</h3>
+
+                        <div clas="checkout_inputs_wrapper">
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'firstname', error_array: errors['validate_errors'].firstname} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'lastname', error_array: errors['validate_errors'].lastname} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'email', error_array: errors['validate_errors'].email} %}
+                        
+                        </div>
+                    
+                    </div>
+
+                    <div class="checkout_area cell" id="address_checkout_input">
+                    
+                        <h3 class="checkout_area_header">Address Info</h3>
+
+                        <div class="checkout_inputs_wrapper">
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'firstline', error_array: errors['validate_errors'].firstline} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'secondline', error_array: errors['validate_errors'].secondline} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'town', error_array: errors['validate_errors'].town} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'city', error_array: errors['validate_errors'].city} %}
+
+                            {# {% include 'layouts/partials/Form/input.twig' with {name: 'country', error_array: errors['validate_errors'].country} %} #}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'postcode', error_array: errors['validate_errors'].postcode} %}
+
+                            {% include 'layouts/partials/Form/input.twig' with {name: 'country', error_array: errors['validate_errors'].country, data: countries } %}
+
+                            
+                            {# once continue to payment -> height 0 & overflow hidden for order info #}
+                            {# or push down to payment section #}
+                        
+                        </div>
+                    
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="postage_section" class="checkout_section">
+                <h2 id="checkout_header" class="checkout_section_header">POSTAGE</h2>
+
+                <div id="postage_wrapper">
+                    <label>choose postage:</label>
+                    <select id="postage_dropdown" name="postage">
+                        {% for delivery in delivery_services %}
+                            {# debug - location converts to correct price and correct currency sign  #}
+                            <option value="{{ delivery.id }}">{{delivery.name}} : £{{ delivery.price|number_format('2', '.', ',') }}</option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div id="user_payment_section" class="checkout_section">
+            
+                <h2 id="checkout_header" class="checkout_section_header">PAYMENT INFORMATION</h2>
+
+                <p id="chosen_payment"></p>
+
+                <div id="payment_option_buttons">
+                    <button id="add_card_button" class="button" type="button">Add Card</button>
+                    <button id="change_payment_method" class="button" type="button">Chage Payment Method</button>
+                </div>
+
+                <div class="hide_payment_option" id="choose_payment_section">
+                
+                    <div class="choose_payment">
+                        <p>Visa ending 4242 expiry</p>
+                        <button class="button" type="button">pay with this</button>
+                    </div>
+
+                    <div class="choose_payment">
+                        <p>Visa ending 4242 expiry</p>
+                        <button class="button" type="button">pay with this</button>
+                    </div>
+
+                </div>
+
+                <div class="hide_payment_option" id="add_payment_section">    
+
+                    {# card input #}
+                    <div class="form-row" id="add_card_wrapper">
+                        <label for="card-element">
+                        <p>Credit or debit card</p>
+                        </label>
+                        <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+
+                    <!-- Used to display Element errors. -->
+                    <div id="card-errors" role="alert"></div>
+
+                    <button id="add_card" class="button" type="button">add card</button>
+                    <button id="cancel_card" class="button" type="button">cancel</button>
+
+                </div>
+
+                </div>
+
+                {# <div class="form-row" id="add_card_wrapper">
+                    <label for="card-element">
+                    Credit or debit card
+                    </label>
+                    <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                    </div>
+
+                    <!-- Used to display Element errors. -->
+                    <div id="card-errors" role="alert"></div>
+
+                </div>
+
+                <div id="choose_payment_wrapper">
+                
+                    <div class="choose_payment">
+                        <p>Visa ending 4242 expiry</p>
+                        <button class="button" action="button">pay with this</button>
+                    </div>
+
+                    <div class="choose_payment">
+                        <p>Visa ending 4242 expiry</p>
+                        <button class="button" action="button">pay with this</button>
+                    </div>
+
+                </div> #}
+
+                <button class="button extended" id="submit_payment">Submit Payment</button>
+
+            </div>
+
+            <div id="basket_checkout" class="cell">
+
+                {# debug - put into table so structure well - easily readable #}
+                
+                    <div id="basket_total">
+
+                        <table id="checkout_products_table">
+
+                            {% for index,product in basket.all %}
+
+                                <tr class="checkout_table_product" id="checkout_total_{{ index }}">
+                                    <td colspan="4" class="checkout_table_desc">{{ product.getName }} </td>
+                                    <td>x</td>
+                                    <td class="checkout_table_product_quantity"><strong>{{ product.quantity }}</strong></td>
+                                    <td>=</td>
+                                    <td class="checkout_table_currency">£</td>
+                                    {% set product_total = product.getPrice * product.quantity %}
+                                    <td class="checkout_table_price" id="product_{{index}}_total">{{ product_total|number_format('2', '.', ',') }}</td>
+                                </tr>
+
+                            {% endfor %}
+
+                            <tr id="checkout_table_postage">
+                                <td colspan="5"  class="checkout_table_desc" id="postage_desc">{{ delivery_services[0].name }}</td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkout_table_currency">£</td>
+                                <td class="checkout_table_price" id="postage_price">{{ delivery_services[0].price|number_format('2', '.', ',') }}</td>
+                            </tr>
+                            <tr class="checkout_table_gap">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+
+                            <tr id="checkout_table_total" >
+                                <td colspan="5"  class="checkout_table_desc">total:</td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkout_table_currency">£</td>
+                                {% set basket_total = basket.getTotal + delivery_services[0].price %}
+                                <td class="checkout_table_price" id="checkout_price">{{ basket_total|number_format('2', '.', ',') }}</td>
+                            </tr>
+
+                        </table>
+                        {# <table id="checkout_calc">
+                            <tr id="basket_postage">
+                                <td colspan="5"  class="checkout_table_desc"><strong id="postage_desc">{{ delivery_services[0].name }}</strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkout_table_currency">£</td>
+                                <td class="checkout_table_price" id="postage_price"><strong>{{ delivery_services[0].price|number_format('2', '.', ',') }}</strong></td>
+                            </tr>
+
+                            <tr id="checkout_total" >
+                                <td colspan="5"  class="checkout_table_desc">total:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="checkout_table_currency">£</td>
+                                {% set basket_total = basket.getTotal + delivery_services[0].price %}
+                                <td class="checkout_table_price" id="checkout_price">{{ basket_total|number_format('2', '.', ',') }}</td>
+                            </tr>
+
+                        </table> #}
+
+                    {# {% for index,product in basket.all %}
+
+
+                    <div id="checkout_total_{{ index }}">
+                        <p>{{ product.getName }} x <strong>{{ product.quantity }}</strong> = </p><p id="product_{{index}}_total">£{{ product.getPrice * product.quantity }}</p>
+                    </div>
+
+                    {% endfor %}
+
+                    <div id="basket_postage">
+                        <p><strong id="postage_desc">{{ delivery_services[0].name }}</strong> = </p><p id="postage_price">{{ delivery_services[0].price }}</p>
+                    </div>
+
+                    <div id="checkout_total" ><p>total: £</p><p id="checkout_price">{{ basket.getTotal + delivery_services[0].price }}</p></div>
+
+                    </div> #}
+
+                    <div id="payment_btns_wrapper">
+
+                    <div onclick="goToPayment()" class="button extended payment_btn" id="go_to_payment_btn" name="proceed_to_payment">proceed to payment</div>
+                    <button class="button extended payment_btn" type="submit" name="continue_to_payment">checkout</button>
+                    {# <div id="card_payment_btn" class="payment_btn">
+                    <a href="{{ url_for('basket.checkout') }}"><div><p>pay by </p></div><div><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i></div></a>
+                    </div>
+                    <div id="paypal_payment_btn" class="payment_btn"><div><p>pay by </p></div><div><i class="fab fa-paypal"></i></div></div>
+                    <div id="apple_payment_btn" class="payment_btn"><div><p>pay by </p></div><div><i class="fab fa-apple-pay"></i></div></div> #}
+                    </div>
+
+            </div>
+
+
+        
+        </form>
+
+    </div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="../js/stripe_checkout.js"></script>
+    
+{% endblock %}

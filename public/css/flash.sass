@@ -1,0 +1,53 @@
+.flash_input
+    display: flex
+    border-left: 2px solid $light_grey
+    flex-direction: column
+    margin-top: 0.1em
+    background-color: rgba(0, 0, 0, 0.1)
+    padding: 0.5em 0
+    padding-left: 0.5em
+    .input_flash_message
+        margin: 0.1em o
+        color: $light_grey
+        font-size: 10px
+        padding: 0.1em 0
+        padding-left: 0.2em
+    &.error
+        background-color: rgba(255, 0, 0, 0.1)
+        border-color: $error
+        .input_flash_message
+            color: $error
+
+.flash_header
+    display: flex
+    width: 99.2vw
+    position: absolute
+    height: 35px
+    bottom: -39px
+    left: 0.4vw
+    top: 10.5vh
+    border-left: 3px solid $light_grey
+    border-right: 3px solid $light_grey
+    background-color: rgba(0, 0, 0, 0.1) 
+    align-content: center
+    justify-content: center
+    transition: all ease-in 0.7s
+    z-index: 999
+    .flash_message
+        text-align: center
+        padding: 0.5em
+        font-size: 12px
+        margin: 0
+        align-self: center
+        text-align: center
+        text-transform: uppercase
+    &.success
+        background-color: rgba(130, 230, 101, 0.1) 
+        border-color: $login
+    &.error
+        background-color: rgba(255, 0, 43, 0.1) 
+        border-color: $error 
+
+.hide_flash_header
+    top: -100% !important
+

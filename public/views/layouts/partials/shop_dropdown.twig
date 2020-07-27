@@ -1,0 +1,37 @@
+
+{# {{ app.getAllCategories | json_encode }} #}
+
+{% set arr = app.getAllCategories %}
+<ul id="nav_shop_link_list">
+    <div id="nav_dropdown_wrapper">
+        <ul id="garment_nav_list">
+
+                <div class="collection_column">
+                    {% for index,collection in arr['collection'] %}
+
+                    <li class="category_link"><a href="{{url_for('type.show', { type: 'collection' ,slug:collection['slug']} ) }}"><i class="fas fa-minus"></i><span>{{ collection['name'] }}</span></a></li>
+
+                    {% if (index + 1) % 3 == 0 %}
+                        </div><div class="collection_column"><li class="category_link"><a href="{{url_for('type.show', {type:'collection', slug:collection['slug']} ) }}"><i class="fas fa-minus"></i><span>{{ collection['name'] }}</span></a></li>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
+        </ul>
+        <ul id="garment_nav_list">
+
+            <div class="collection_column">              
+            {% for index, category in arr['category'] %}
+
+                <li class="category_link"><a href="{{url_for('type.show', { type: 'category', slug:category['slug']} ) }}"><i class="fas fa-minus"></i><span>{{ category['name'] }}</span></a></li>
+
+                    {% if (index + 1) % 4 == 0 %}
+                        </div><div class="collection_column"><li class="category_link"><a href="{{url_for('type.show', { type: 'category', slug:category['slug']} ) }}"><i class="fas fa-minus"></i><span>{{ category['name'] }}</span></a></li>
+                    {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+ </ul>
+ 

@@ -1,0 +1,66 @@
+{% set type = '' %}
+
+{% if name == 'password'%}
+    {% set type = 'password' %}
+
+{% elseif name == 'verify_password'%}
+    {% set type = 'password' %}
+
+{% elseif name == 'email' %}
+    {% set type = 'email' %}
+
+{% else %}
+    {% set type = 'text' %}
+    
+{% endif %}
+
+<div class="floated-label-wrapper">
+
+    <div class="form_input_wrapper">
+
+        {% if name != 'country' %}
+
+            {% if name == 'secondline' %}
+                <input type="{{type}}" class="form_input {{ error_array ? 'invalid_input' : '' }} {{ error_array == 'true' ? 'input_success' : '' }}" name="{{name}}" value="{{oldFormInput[name]}}">
+            {% else %}
+                <input type="{{type}}" class="form_input {{ error_array ? 'invalid_input' : '' }} {{ error_array == 'true' ? 'input_success' : '' }}" required name="{{name}}" value="{{oldFormInput[name]}}">
+            {% endif %}
+            
+            <div class="input_label">
+                <label for="{{name}}">{{name}}</label>
+            </div>
+            
+        {% else  %}
+
+            <select name="country" id="choose_country_dropdown" class="form_input {{ error_array ? 'invalid_input' : '' }} {{ error_array == 'true' ? 'input_success' : '' }}">
+
+                {{ data | raw }}
+            
+                {# foreach country (from db countries) - value is country id #}
+                {% for country in data %}
+
+                    <option value="{{country.id}}">{{ country.name }}</option>
+
+                {% endfor %}
+            
+            </select>
+
+            <div class="input_label">
+                <label for="{{name}}">{{name}}</label>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    {% if error_array and error_array != 'true' %}
+        <div class="flash_input error">
+        {% for error in error_array %}
+                <small class="input_flash_message">{{error}}</small>
+        {% endfor %}
+
+        </div>
+    {% endif %}
+
+
+</div>

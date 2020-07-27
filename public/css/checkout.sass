@@ -1,0 +1,224 @@
+.body_container
+    width: 90vw
+    height: fit-content
+    #checkout_order_form
+        height: fit-content
+        display: flex
+        flex-direction: column
+        width: calc(98% - 27em)
+        position: relative
+        .checkout_section
+            height: fit-content
+            margin-bottom: 3em
+            position: relative
+            background-color: $smoke_white
+            padding: 2em 2em
+            // payment option buttons
+            #payment_option_buttons
+                button
+                    margin-right: 2em
+            .checkout_section_header
+                margin-bottom: 0.5em
+                width: 65.8%
+                padding: 0 1em 1em 0
+                border-bottom: 1px solid $light_grey
+                margin-top: 0
+                letter-spacing: 0.5px
+            #chosen_payment
+                padding: 2em 1em
+                margin: 1em 0
+                background-color: $off_white
+                text-transform: uppercase
+                font-weight: bold
+            .checkout_info_form
+                display: flex
+                justify-content: space-around
+                flex-flow: row
+                width: 100%
+                .checkout_area
+                    padding: 1em
+                    max-width: 32em
+                    width: 50%
+                    .checkout_area_header
+                        margin-bottom: 1.25em
+                        width: 100%
+                        padding: 0 1em 1em 0
+                        border-bottom: 1px solid $light_grey
+                        margin-top: 0
+                    button
+                        margin-top: 2em
+                        width: 100%
+                    .checkout_inputs_wrapper
+                        .floated-label-wrapper
+                            .form_input_wrapper
+                                #choose_country_dropdown
+                                    border-right: none
+                                    height: auto
+                                    padding: 0.78rem 1.5rem 0.78rem 0.8rem
+                                    margin: 0
+                                    width: 70%
+                                .form_input
+                                .input_label
+                                    label
+            #submit_payment
+                margin-top: 2em
+
+        // POSTAGE SECTION  
+        #postage_section
+            #postage_wrapper
+                label
+                    text-transform: uppercase
+                    font-size: 12px
+                    margin-bottom: 0.7em
+                select
+                    text-transform: uppercase
+                    option
+                        
+
+        #user_payment_section
+            height: 100vh
+            // CHOOSE OPTIONS FOR PAYMENT SECTION
+            #payment_option_section
+                background-color: $smoke_white
+                padding: 0
+                button
+                    margin-right: 1.5em
+            // ADDING CARD SECTION
+            #add_payment_section
+                margin: 2em auto 4em
+                background-color: $off_white
+                padding: 1.5em 1em 1em
+                p
+                    margin-bottom: 1em
+                    text-transform: uppercase
+                    font-weight: bold
+                .StripeElement 
+                    box-sizing: border-box
+                    height: 40px
+                    padding: 10px 12px
+                    border: 1px solid transparent
+                    border-radius: 4px
+                    background-color: white
+                    box-shadow: 0 1px 3px 0 #e6ebf1
+                    -webkit-transition: box-shadow 150ms ease
+                    transition: box-shadow 150ms ease
+                    width: 450px
+                    max-width: 60%
+                .StripeElement--focus 
+                    box-shadow: 0 1px 3px 0 #cfd7df
+                
+
+                .StripeElement--invalid 
+                    border-color: #fa755a
+                
+
+                .StripeElement--webkit-autofill 
+                    background-color: #fefde5 !important
+                button
+                    margin-top: 1.5em
+
+            // CHOOSING CARD SECTION
+            #choose_payment_section
+                margin: 1em 0 3em
+                display: flex
+                flex-direction: column
+                .choose_payment
+                    padding: 2em 1em
+                    margin: 1.5em 0 0
+                    background-color: $smoke_white
+                    opacity: 0.5
+                    display: flex
+                    flex-direction: row
+                    flex-wrap: nowrap
+                    justify-content: space-between
+                    transition: all linear 0.1s
+                    border-bottom: 1px solid $light_grey
+                    align-content: center
+                    align-items: center
+                    &:hover
+                        background-color: $off_white
+                        opacity: 1
+                        color: $off_black
+                    p
+                        text-transform: uppercase
+                        margin: 0
+                        padding: 0
+                        font-weight: bold
+                    button                
+                        margin: 0       
+        // CHECKOUT INFO PANE
+        #basket_checkout
+            top: 18vh
+            #basket_total
+                #checkout_products_table
+                    margin-bottom: 2em
+                #checkout_calc
+                    tbody
+                        tr
+                            td
+                                padding-top: 0.5em
+                                padding-bottom: 0.5em
+                table   
+                    border: none
+                    tbody
+                        border: none
+                        #checkout_table_postage
+                            border-bottom: 1px solid $light_grey
+                            td
+                                padding-top: 0.5em
+                                padding-bottom: 0.5em
+                        #checkout_table_total
+                            border-bottom: 1px solid black
+                            border-top: 1px solid black
+                            td
+                                padding-top: 0.5em
+                                padding-bottom: 0.5em
+                            .checkout_table_price
+                                font-weight: bold
+                            .checkout_table_desc
+                                font-weight: bold
+                                font-size: 16px
+                                text-transform: uppercase
+                        .checkout_table_gap
+                            td
+                                padding: 1em 0
+                        .checkout_table_product
+                            border-bottom: 1px solid $light_grey
+                            td
+                                // padding-top: 2em
+                                // padding-bottom: 0 !important
+                        tr
+                            background-color: white
+                            td
+                                // border: 1px solid black
+                                // padding: 0
+                            .checkout_table_price
+                                font-size: 16px
+                                float: right
+                                width: 60px
+                                text-align: right
+                                padding-right: 0
+                                font-weight: 400
+                            .checkout_table_currency
+                                font-weight: 400
+                                font-size: 14px
+                                padding-right: 0
+                            .checkout_table_desc
+                                font-size: 13px
+                                padding: 0
+                            .checkout_table_product_quantity
+                                font-size: 13px
+                                padding-left: 0
+                                text-align: right
+                // CHECKOUT INFO PANE BTNS
+                #payment_btns_wrapper
+                    flex-direction: column 
+                    margin-top: 0
+            
+
+
+
+// RESPONSIVE
+
+
+

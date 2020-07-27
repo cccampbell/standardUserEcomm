@@ -1,0 +1,13 @@
+
+{% if flash.failed %}
+
+    <div class="flash_header error" id="flash_message">
+        <small class="flash_message">{{ flash.failed }}</small>
+    </div>
+{% elseif flash.success %}
+
+    <div class="flash_header success" id="flash_message">
+        <small class="flash_message">{{ flash.success }}</small>
+    </div>
+
+{% endif %}

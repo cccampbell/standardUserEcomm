@@ -1,0 +1,109 @@
+.floated-label-wrapper
+    margin: 2em 0
+    // border: 1px solid black
+    .form_input_wrapper
+        padding: 0
+        position: relative
+        justify-content: flex-end
+        margin: 0
+        display: flex
+        align-content: center
+        align-items: center
+        .input_label
+            width: 30%
+            display: flex
+            position: relative
+            padding: 0
+            margin: 0
+            padding: 1.5em 0
+            height: fit-content
+            border: 1px solid $light_grey
+            text-transform: capitalize
+            label
+                position: absolute
+                display: flex
+                top: 0
+                left: 0
+                right: 0
+                bottom: 0
+                font-size: calc(6px + 2 * ((100vw + 320px) / 680))
+                background-color: white
+                align-items: center
+                justify-content: center
+                color: rgba(0, 0, 0, 0.5)
+                opacity: 1
+                font-weight: normal
+                border: none
+                z-index: 10
+
+        input
+            box-shadow: none
+            margin: 0
+            width: 70%
+            float: right
+            transition: $transition
+            border: 1px solid $light_grey
+            border-right: none
+            font-size: 12px
+            padding: 1.5em
+            &:hover, &:focus
+                width: 100%
+                border: 1px solid $signup
+                + .input_label
+                    border: 1px solid $signup
+                    border-left: none
+                    label
+                        color: $signup
+                        font-size: calc(6px + 1 * ((100vw + 320px) / 680))
+        select
+            border: 1px solid $light_grey
+        .invalid_input
+            border: 1px solid $error
+            + .input_label
+                border: 1px solid $error
+                border-left: none
+                label
+                    color: $error 
+        .input_success
+            border: 1px solid $login
+            + .input_label
+                border: 1px solid $login
+                border-left: none
+                label
+                    color: $login 
+    // NOT IN USE
+    #password_warning
+        display: none
+        align-self: flex-end
+        margin: 0
+        margin-top: 0.5em
+        padding: 1em
+        flex-direction: column
+        border: 1px solid $warning
+        align-items: flex-start
+        background-color: rgba(255, 125, 0, 0.2)
+        color: rgba(0, 0, 0, 1)
+        h4
+            font-size: calc(12px + 2 * ((100vw + 320px) / 680))
+            margin-left: 0.9em
+            text-transform: uppercase
+        ul
+            list-style: none
+            width: 85%
+            li
+                margin: 0.5em auto
+                padding: 0
+                font-size: calc(8px + 2 * ((100vw + 320px) / 680))
+                display: flex
+                flex-direction: row
+                flex-wrap: nowrap
+                justify-content: space-between
+                p
+                    margin: 0
+                    padding: 0
+                .failed_input_need
+                    color: $warning
+
+    .show_input_warning
+        display: flex !important
+        

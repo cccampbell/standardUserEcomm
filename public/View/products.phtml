@@ -1,0 +1,171 @@
+
+
+  <div class="" id="products_wrap">
+
+    <div class="products_row grid-x grid-margin-x" id="products_row">
+
+      <?php foreach ($view->products as $product) {
+        //get colors in multi-dim array 'color' 'color-code'
+
+        $stock = $productDataSet->getProductSizeQuantity($product->getProductId());
+
+        // GETTING THE FIRST COLOUR OF PRODUCT (AS DEFAULT))
+        $first = reset($stock);
+
+        // var_dump($first);
+
+        echo '<div class="cell small-6 large-3 product">
+          <a href="/product.php?prodid='. $product->getProductId() .'&slug='. $product->getSlug() .'&colour='. $product->getColour() .'">
+            <div class="product_thumbnail">
+              <img src="/img/'.$product->getProductImg().'" class="prod_img">';
+              if($product->checkTotalStock() !== 'in stock') {
+                echo '<div class="product_thumbnail_alert">'. $product->checkTotalStock().'</div>';
+              }
+              echo '
+            </div>
+            <div class="prod_info">
+              <div class="prod_card_info grid-x">
+                <div class="prod_info_left cell small-9">
+                  <h3 class="prod_name">'.$product->getProductName().'</h3>
+                  <div class="prod_colors">';
+                  
+                  foreach($stock as $color) {
+
+                    if($color['id'] === $product->getColour()) {
+
+                      echo '<div value="'.$color['id'].'" class="color_of_product given_color" style="background-color:#'. $color['hex_code'] .'"></div>';
+
+                    } else {
+
+                      echo '<div value="'.$color['id'].'" class="color_of_product" style="background-color:#'. $color['hex_code'] .'"></div>';
+
+                    }
+                  };
+                    
+                    echo '</div>
+                </div>
+
+                <h4 class="prod_price small-3">£'. $product->getProductPrice() .'</h4>
+              </div>
+
+
+
+            </div>
+          </a>
+        </div>';
+      } ?>
+    </div>
+  </div>
+  <div class="grid-x" id="shop_filter_bar">
+      <h5 class="filter_sort_btns" id="filter_products_btn" onclick="toggleFilterPane()">filter</h4>
+      <h5 class="filter_sort_btns" id="sort_products_btn"onclick="toggleSortPane()">sort</h5>
+  </div>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+ 
+  <div class="pane" id="sort_pane">
+      <h4 class="pane_header">sort</h4>
+
+        <div class="pane_btns_wrapper" id="pane_btns_wrapper">
+
+          <!-- <div class="pane_btn sort_btns" name="sort_high"> 
+            <input id="sort_high" name="sort" value="high" type="radio" class="radio_sort">
+            <label for="sort_high" class="sort_btn_label">high <i class="fas fa-arrow-down"></i></label>
+          </div>
+
+          <div class="pane_btn sort_btns" name="sort_low"> 
+            <input id="sort_low" name="sort" value="low" type="radio" class="radio_sort">
+            <label for="sort_low" class="sort_btn_label">low <i class="fas fa-arrow-down"></i></label>
+          </div>
+
+          <div class="pane_btn sort_btns" name="sort_new"> 
+            <input checked="yes" id="sort_new" name="sort" value="new" type="radio" class="radio_sort">
+            <label for="sort_new" class="sort_btn_label">new <i class="fas fa-arrow-down"></i></label>
+          </div> -->
+
+          <?php
+            foreach($sort_arr as $sort) {
+
+              if(isset($_GET['sort'])) {
+
+                if($_GET['sort'] === $sort) {
+                  echo '<div class="pane_btn sort_btns" name="sort_'.$sort.'"> 
+                          <input checked="yes" id="sort_'.$sort.'" name="sort" value="'.$sort.'" type="radio" class="radio_sort">
+                          <label for="sort_'.$sort.'" class="sort_btn_label">'.$sort.'</label>
+                        </div>';
+                } else {
+                  echo '<div class="pane_btn sort_btns" name="sort_'.$sort.'"> 
+                          <input id="sort_'.$sort.'" name="sort" value="'.$sort.'" type="radio" class="radio_sort">
+                          <label for="sort_'.$sort.'" class="sort_btn_label">'.$sort.'</label>
+                        </div>';
+                }
+              } else {
+                if($sort === 'new') {
+                  echo '<div class="pane_btn sort_btns" name="sort_'.$sort.'"> 
+                          <input checked="yes" id="sort_'.$sort.'" name="sort" value="'.$sort.'" type="radio" class="radio_sort">
+                          <label for="sort_'.$sort.'" class="sort_btn_label">'.$sort.'</label>
+                        </div>';
+                } else {
+                  echo '<div class="pane_btn sort_btns" name="sort_'.$sort.'"> 
+                            <input id="sort_'.$sort.'" name="sort" value="'.$sort.'" type="radio" class="radio_sort">
+                            <label for="sort_'.$sort.'" class="sort_btn_label">'.$sort.'</label>
+                          </div>';
+                }
+              }
+             }
+          ?>
+
+          <!-- <div class="pane_btn"  onclick="sortProducts('low')" name="sort_low">low <i class="fas fa-arrow-down"></i></div>
+          <div class="pane_btn" onclick="sortProducts('new')">newest</div> -->
+        </div>
+  </div>
+
+  <div id="filter_pane" class="pane">
+     
+      <h4 class="pane_header">collections</h4>
+      <!-- COLLECTIONS -->
+      <div class="filter_pane_group_wrapper" id="collection_filter_wrapper">
+
+          <?php foreach($theArr['collection'] as $collection) {
+            
+            if(isset($_GET['filter'])) {
+
+              if(in_array($collection['id'], $filter_arr)) {
+                echo '<div><div><input type="checkbox" class="filter_input" value="'.$collection['id'].'" checked="yes" name="checkbox_filter[]"><label>'. $collection['name'] .'</label></div></input><p>(12)</p></div>';
+              } else {
+                echo '<div><div><input type="checkbox" class="filter_input" value="'.$collection['id'].'" name="checkbox_filter[]"><label>'. $collection['name'] .'</label></div></input><p>(12)</p></div>';
+              }
+            } else {
+              echo '<div><div><input type="checkbox" class="filter_input" value="'.$collection['id'].'" name="checkbox_filter[]"><label>'. $collection['name'] .'</label></div></input><p>(12)</p></div>';
+            }
+
+          } ?>
+      </div>
+
+      <h4 class="filter_pane_header">categories</h4>
+      <!-- CATEGORIES -->
+      <div class="filter_pane_group_wrapper" id="category_filter_wrapper">
+          <?php foreach($theArr['category'] as $categories) {
+            if(isset($_GET['filter'])) {
+              if(in_array($categories['id'], $filter_arr)) {
+                echo '<div><div><input type="checkbox" checked="yes" class="filter_input" value="'.$categories['id'].'" name="checkbox_filter[]"><label>'. $categories['name'] .'</label></div></input><p>(12)</p></div>';
+              } else {
+                echo '<div><div><input type="checkbox" class="filter_input" value="'.$categories['id'].'" name="checkbox_filter[]"><label>'. $categories['name'] .'</label></div></input><p>(12)</p></div>';
+              }
+            } else {
+              echo '<div><div><input type="checkbox" class="filter_input" value="'.$categories['id'].'" name="checkbox_filter[]"><label>'. $categories['name'] .'</label></div></input><p>(12)</p></div>';
+            }
+          } ?>
+      </div>
+
+      <div class="pane_btns_wrapper">
+          
+            <div class="pane_btn" onclick="location.href='products.php'">clear</div>
+            <div name="submit_filter" class="pane_btn" onclick="selectedFilters()">apply</div>
+          
+      </div>
+    </form>
+  </div>
+  </form>
+
+
+<!-- <div class="pane_btn" onclick="getSelectedFilters()">apply</div> -->

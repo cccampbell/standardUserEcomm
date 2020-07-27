@@ -1,0 +1,41 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+<div class="background_blur"></div>
+
+<section id="confirmation_order_section">
+
+    <div class="pane" id="order_confirmation_wrapper">
+
+        <h3 class="pane_header">order confirmation</h3>
+
+        <h5 id="order_confirmation_greeting">Thank you for your order!</h5>
+
+        <h5 id="confirmation_order_number" >Order Number: <strong>3782356</strong></h5>
+
+        <h2>order summery</h2>
+        {# wrapper for items ordered #}
+        <div id="ordered_products_wrapper">
+        {% for product in products %}
+
+            {% include 'layouts/partials/basket_pane_product.twig' with {product : product} %}
+            {# within the div, on the right add in quantity e.g x 2 #}
+        {% endfor %}
+        </div>
+        <div id="confirmation_order_total">
+        
+            <strong>total:</strong><h3>£150</h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+{% endblock %}

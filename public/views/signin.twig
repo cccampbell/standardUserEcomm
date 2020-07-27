@@ -1,0 +1,35 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+<div id="signup_body" class="body_container grid-x">
+
+    <div id="signup_wrapper" class="grid-container cell small-12 large-6">
+
+        <h1>Sign-in</h1>
+
+        {# pass in twig give params array, name #}
+
+
+        <form name="signup_form" action="{{ url_for('auth.signin') }}" method="post">
+
+
+            {% include 'layouts/partials/Form/signup_input.twig' with {name: 'email', error_array: errors['validate_errors'].email} %}
+
+            {% include 'layouts/partials/Form/signup_input.twig' with {name: 'password', error_array: errors['validate_errors'].password} %}
+
+
+            <button class="button extended" type="submit" name="submit">
+                Sign-in
+            </button>
+
+            {# {{ csrf() | raw }} #}
+
+        </form>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

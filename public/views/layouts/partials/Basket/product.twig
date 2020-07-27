@@ -1,0 +1,47 @@
+<div id="basket_product_{{ product.slug }}_{{ index }}" class="basket_item_wrapper grid-x grid-margin-x cell">
+
+        <div class="cell small-5" id="prod_page_img_wrapper">
+          <img placeholder="product img" src="/img/{{ product.getImg }}" />
+        </div>
+
+        <div id="basket_item_info">
+          <div class="item_essential_info">
+            <h2>{{ product.getName() }}</h2>
+            <h4>£{{ product.getPrice }}</h4>
+          </div>
+          <div class="grid-x" id="basket_chosen_details">
+
+            <div class="basket_item_color">
+              <span>Colour: </span><span value="{{ product.getColourId }}">{{ product.getColour }}</span>
+            </div>
+
+            <div class="basket_item_size">
+              <span>size: </span><span>{{ product.getSize }}</span>
+            </div>
+
+
+            <div class="basket_item_quantity">
+              <div>
+                <span>qty:</span>
+                <select class="basket_product_quantity" onchange="changeProductquantity()">
+                  {# {% set availableQuantity = basket.maxQuantity % product.getStock %} #}
+                  {% for i in 1..5 %}
+
+                    {% if i == product.quantity %}
+                      <option selected value="{{ product.quantity }}">{{ product.quantity }}</option>
+                    {% else %}
+                      <option value="{{ i }}">{{ i }}</option>
+                    {% endif %}
+
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <button onclick="removeFromBasket( {{ product.getId }}, '{{ product.getSlug }}', {{ index }})" class="remove_b_item button">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>

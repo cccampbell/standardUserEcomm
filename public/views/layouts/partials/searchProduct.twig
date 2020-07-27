@@ -1,0 +1,12 @@
+{# {{ suggest | json_encode }} #}
+
+{% for product in suggest %}
+
+    <div class="suggestion">
+        <a href="{{ url_for('product.show', { slug: product.slug }) }}">
+            <img src="/img/{{ product.img }}">
+            <p>{{ product.name }}</p>
+        </a>
+    </div>
+
+{% endfor %}

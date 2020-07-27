@@ -1,0 +1,19 @@
+<div class="basket_item" value="{{ product.getId }}">
+  <a href="{{ url_for('product.show', {slug:product.getSlug}) }}">
+    <img src="/img/{{ product.getImg }}"/>
+
+    <div class="bitem_info">
+
+      <div class="bitem_name">
+        <h4 class="item_name">{{ product.getName }}</h4>
+      </div>
+
+      <div class="bitem_selected">
+        <h6 class="item_size">size : {{ product.getSize }}</h6>
+        <h6 class="item_color">colour : {{ product.getColour }}</h6>
+      </div>
+
+    </div>
+
+  </a>
+</div>

@@ -1,0 +1,49 @@
+@keyframes circle--animation 
+  0% 
+    stroke-dashoffset: 50
+  50% 
+    stroke-dashoffset: 280
+
+@keyframes svg--animation 
+  0% 
+    transform: rotateZ(0deg)
+  
+  100% 
+    transform: rotateZ(360deg)
+
+#loader
+    position: absolute
+    height: 100vh
+    width: 100vw
+    background-color: rgba(179,179,179,0.2)
+    z-index: 20000
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    svg
+        z-index: inherit
+        height: 100px
+        width: 100px
+        overflow: hidden
+        animation: 2s linear infinite svg--animation
+        margin-bottom: 2em
+        circle
+            max-width: 100px
+            border: 2px solid black
+            fill: transparent
+            stroke: #2f3d4c
+            z-index: 100000
+            stroke-width: 10
+            stroke-dasharray: 283
+            stroke-linecap: round
+            transform-origin: 50% 50%
+            stroke-dashoffset: 75
+            // stroke-dashoffset: 280
+            animation: 1.4s ease-in-out infinite both circle--animation
+        
+    p
+        font-size: 12px
+        text-transform: uppercase
+        letter-spacing: 0.1px
+        

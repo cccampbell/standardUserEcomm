@@ -1,0 +1,163 @@
+#home_hero
+  height: 105vh
+  display: flex
+  align-items: center
+  #home_hero_img
+    background-position: center
+    background-size: cover
+  #home_hero_info
+    position: relative
+    margin-left: 10%
+    h2
+      font-family: Roboto
+      width: 60%
+      font-size: 50px
+      text-transform: uppercase
+      letter-spacing: -1px
+      margin-bottom: 1em
+      margin-top: -2.5em
+    h3
+      font-family: $title_font
+      font-size: 25px
+      margin-bottom: 0.5em
+      width: fit-content
+      position: relative
+      text-transform: uppercase
+      &::after
+        content: ''
+        border-bottom: 1px solid $primary
+    p
+      font-family: $text_font
+      font-size: 16px
+      width: 55%
+      margin-bottom: 1.5em
+    button
+      border: none
+      background-color: $primary !important
+      border: 1px solid $primary !important
+      a
+        font-family: $title_font
+        color: white !important
+        font-size: 14px
+        letter-spacing: 0.5px
+
+#home_about_clothing
+  width: 90%
+  border: 1px solid white
+  margin: -15vh auto 0
+  z-index: 100
+  background-color: white
+  color: black
+  padding: 5em 5em 2em
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2%)
+  border-radius: 20px
+  #home_about_clothing_blurb
+    h3
+      font-size: 32px
+      text-transform: capitalize
+      margin-bottom: 1em
+      font-family: $header_font
+      font-weight: light
+      text-transform: uppercase
+      letter-spacing: -1px
+    p
+      font-size: 16px
+      width: 80%
+      line-height: 1.75
+  #home_about_clothing_features
+    padding: 2em
+    .home_about_clothing_feature
+      display: flex
+      flex-direction: row
+      // justify-content: space-around
+      padding: 1em 1em
+      margin-bottom: 2em
+      svg
+        font-size: 30px
+        margin-right: 3em
+      h4
+        text-transform: uppercase
+        font-size: 16px
+        font-family: $header_font
+      
+#potw
+  width: 90%
+  background-color: transparent
+  padding: 2em 3em
+  margin: 5em auto 5em
+  // border: 1px solid black
+  justify-content: space-between
+  #potw_blurb
+    h2
+      font-size: 40px
+      text-transform: capitalize
+      letter-spacing: -1px
+      font-family: $header_font
+      width: max-content
+    #potw_info
+      padding-right: 3.75em
+      margin-top: 4em
+      #potw_name
+        font-size: 30px
+        // margin-bottom: 0.5em
+      p
+        font-size: 16px
+  #potw_cta
+    display: flex
+    justify-content: center
+    flex-direction: column
+    width: fit-content
+    padding-right: 1em
+    img
+      width: fit-content
+      
+      margin: 1em auto 2em
+    button
+      width: 150px
+      padding: 1em 5em
+      margin: 0 auto
+      text-transform: uppercase
+      // border: 2px solid black
+      a
+        font-size: 12px
+        font-weight: bold
+#subscribe_banner
+  background-color: $primary
+  color: white
+  flex-direction: row
+  align-content: center
+  justify-content: space-between
+  // overflow: hidden
+  // box-shadow: 0px 0px 0px 100px black
+  h3
+    // margin-right: 5em
+    font-size: 32px
+    text-transform: uppercase
+  div
+    width: 60%
+    display: flex
+    flex-direction: row
+    align-content: center
+    align-items: center
+    border: 2px solid white
+    height: fit-content
+    border-radius: 3px
+    input
+      width: 70%
+      margin: 0
+      border: none
+      box-shadow: none
+      background-color: transparent
+    button
+      width: 30%
+      margin: 0
+      padding: auto 2em
+      height: auto
+      font-size: 12px !important
+      border: none
+      border-left: 2px solid white !important
+      border-radius: 0 !important
+      color: white !important
+      text-transform: uppercase
+      letter-spacing: 1px
+      

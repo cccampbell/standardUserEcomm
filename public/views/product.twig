@@ -1,0 +1,171 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+<div class="grid-x" id="product_page_hero">
+
+  <div id="active_img_wrap" class="cell medium-10 large-auto product_page_img">
+    <img id"active_img" src="../../img/{{ products['product_data'][slug].getImg }}?>"/>
+  </div>
+
+  <div id="product_carousel_wrap" class="grid-x medium-10 large-3 ">
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+    <div class="product_carousel_row cell small-4 large-12 grid-x">
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+      <div class="cell small-5 product_page_img">
+        <img src="/img/<?php echo $selected_product->getProductImg() ?>"/>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>
+
+<div class="grid-x grid-margin-x body_container" id="product_container">
+
+    <div class="grid-x grid-margin-x cell large-12" id="product_page_info">
+
+        <div class="cell large-6" id="info_left">
+        <div>
+            <h2>{{ products['product_data'][slug].getName }}</h2>
+            <h4>£{{products['product_data'][slug].getPrice }}</h4>
+        </div>
+        <p>{{ products['product_data'][slug].getDesc }}</p>
+        </div>
+
+        <div class="cell large-6 grid-x grid-margin-x" id="info_right">
+
+        <details class="product_info cell large-12" id="product_key_features">
+            <summary class="key_feature_title_wrapper">
+              <i class="fas fa-angle-down product_info_arrow"></i>
+              <h3>product details</h3>
+            </summary>
+            <ul class="product_list">
+                <li>one</li>
+                <li>two</li>
+                <li>three</li>
+                <li>four</li>
+            </ul>
+        </details>
+
+        <details class="product_info cell large-12" id="product_care">
+            <summary class="key_feature_title_wrapper">
+              <i class="fas fa-angle-down product_info_arrow"></i>
+              <h3>care label</h3>
+            </summary>
+            <ul class="product_list">
+                <li>one</li>
+                <li>two</li>
+                <li>three</li>
+                <li>four</li>
+            </ul>
+        </details>
+        <details class="product_info cell large-12">
+            <summary class="key_feature_title_wrapper">
+              <i class="fas fa-angle-down product_info_arrow"></i>
+              <h3>returns</h3>
+            </summary>
+            <ul class="product_list">
+                <li>one</li>
+                <li>two</li>
+                <li>three</li>
+                <li>four</li>
+            </ul>
+        </details>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BASKET STUCK TO BOTTOM OF SCREEN -->
+<form action="" method="post" class="sticky_basket sticky_bottom_bar grid-x">
+
+  <!-- colour-way / size / add to basket -->
+    <div class="float_right" id="basket_selection_wrap">
+    
+      <select id="basket_colorway" name="select_colorway" style="border-color:#{{ products['product_data'][slug].getColourHex }}">
+
+        {# CREATES SELECT FOR EACH COLOUR OF PRODUCT #}
+        {% for colour in products['product_data'] %}
+
+            {# GETS CURRENT COLOUR AND MAKES IT THE SELECTED #}
+            {% if colour.getColourId == products['product_data'][slug].getColourId %}
+                <div class="color_selector" style="background-color:#{{ colour.getColourHex }}"></div><option value="{{ colour.getColourId }}" selected>{{ colour.getColour }}</option>
+            {% else %}
+
+                <div class="color_selector" style="background-color:#{{ colour.hex }}"></div>
+                <option value="{{ colour.getSlug }}">{{ colour.getColour }}</option>
+
+            {% endif %}
+
+        {% endfor %}
+      </select>
+
+      <select id="basket_size" name="select_size">
+
+        {% for stock, value in products['product_data'][slug].getStockTotal %}
+
+          {% if value['quantity'] != 0 %}
+            <option value="{{ value['id'] }}">{{stock}}</option>
+          {% endif %}
+
+        {% endfor %}
+        
+      </select>
+
+      {# <p>{{ products['product_data'][selected_colour].getStockTotal }}</p> #}
+
+
+  </div>
+
+
+  <div class="product_entry">
+    {# <?php
+      if($total_stock == 0) {
+        echo '<div class="button footer_stock_warning" id="no_stock_warning">no stock left</div>';
+      } if ($total_stock <= 20) {
+        echo '<div class="button footer_stock_warning" id="last_few_warning">last few in stock</div>';
+      } else {
+      }
+    ?> #}
+    {# <h1>{{  }}</h1> #}
+    {# <h1><script>document.write(document.getElementById('basket_size').options[document.getElementById('basket_size').selectedIndex].value)</script></h1> #}
+    <div onclick="addToBasket()" class="button extended float-right" id="add_to_basket_btn"><p>Add to Basket</p><p>£{{ products['product_data'][slug].getPrice }}</p></div>
+  </div>
+
+</form>
+
+{% endblock %}

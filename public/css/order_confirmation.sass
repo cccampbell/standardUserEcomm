@@ -1,0 +1,105 @@
+.background_blur
+    position: absolute
+    height: 110vh
+    width: 110vw
+    filter: blur(10px)
+    z-index: 1001
+    background-color: rgba(255, 255, 255, 0.8)
+
+#order_confirmation_wrapper
+    // height: 30vh
+    position: absolute
+    align-self: center 
+    justify-self: center 
+    width: 90%
+    max-width: 600px
+    z-index: 10002
+    display: flex !important
+    left: calc(70% - 600px)
+    opacity: 1
+    margin-top: 10vh
+    justify-self: center
+    flex-direction: column
+    padding: 3em 3em
+    transition: $hover
+    &:hover
+        // box-shadow: 0 4px 4px 2px hsla(0, 0%, 0%, 20%)
+        // margin-top: 10.05vh
+    .pane_header
+        padding-bottom: 0.5em
+        padding-top: 0.5em
+        border-bottom: 1px solid $primary
+        margin-bottom: 1em
+        text-transform: uppercase
+        font-size: 30px
+        letter-spacing: 0.5px
+    #order_confirmation_greeting
+        margin-bottom: 1em
+    h2
+        font-size: 25px
+        letter-spacing: 1px
+        text-transform: uppercase
+        border-bottom: 1px solid $primary
+        padding-bottom: 0.5em
+        margin-top: 2em
+        font-weight: 400
+    #confirmation_order_total
+        font-size: 25px
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-content: center
+        padding: 0.5em 0
+        margin: 1em 0
+        width: 100%
+        border-top: 1px solid black
+        border-bottom: 1px solid black
+        text-transform: uppercase
+        h3
+            font-size: 25px
+// order items
+#ordered_products_wrapper
+    width: 100%
+    max-width: 700px
+    margin: 2em auto 0 
+    .basket_item
+        width: 100%
+        a
+            width: 95%
+            display: flex
+            padding: 1em 1em
+            flex-direction: row
+            justify-content: space-between
+            margin: 0.7em auto
+            // border: 1px solid black
+            border: 1px solid hsla(0,0%, 94%, 0.9)
+            background-color: white
+            border-radius: 3px
+            .bitem_info
+                display: flex
+                position: relative
+                flex-direction: column !important
+                width: 70%
+                align-content: space-between
+                justify-content: left
+                color: black
+                text-align: left
+                .bitem_name
+                margin-top: 0.25em
+                .bitem_selected
+                display: flex
+                text-transform: capitalize
+                flex-direction: row
+                justify-content: space-around
+                .item_size
+
+            img
+                width: 92px
+                //border: 1px solid grey
+                height: 92px
+                object-fit: contain
+                margin-right: 2em
+            .basket_cross
+                float: right
+                z-index: 55
+                &:hover

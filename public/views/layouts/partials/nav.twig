@@ -1,0 +1,130 @@
+<div class="grid-x grid-margin-x align-justify " id="nav">
+
+    <div class="vertical medium-horizontal menu grid-x" id="navbar_wrapper">
+
+      <i class="fas fa-bars" id="nav_menu"></i>
+
+      <ul id="nav-left" class="cell small-3">
+        <li id="company_title" class="main_nav_btn"><a href="{{ url_for('home') }}"><i class="fas fa-minus"></i> <span>standard clothing</span></a></li>
+        <li class="main_nav_btn" id="nav_shop_btn"><a id="nav_shop_link" href="{{ url_for('product.showAll') }}"><i class="fas fa-minus"></i> <span>Shop</span></a>
+          {% include 'layouts/partials/shop_dropdown.twig' %}
+        </li>
+
+        <li class="main_nav_btn"><a href="#0" id="nav_about"><i class="fas fa-minus"></i> <span>About</span></a></li>
+
+      </ul>
+
+
+    <!--     SEARCH BAR      -->
+
+    <div class="searchbar cell auto" id="searchbar">
+      <div class="searchbar_btn" id="open_search">
+        <i class="fas fa-search searchbar_icon" id="open_search_btn" onclick="toggleSuggestWrapper()"></i>
+      </div>
+      
+        <input required type="search" id="nav_search" placeholder="Search.." onkeyup="showSuggest(this.value)"/>
+      
+      <div class="searchbar_btn" id="search_product">
+        <i class="fas fa-check searchbar_icon" id="search_btn"></i>
+      </div>
+    </div>
+
+
+    <ul class="cell small-5 large-3" id="nav-right">
+
+        {% if user %}
+          <li id="active_login" class="logged_in main_nav_btn"><div id="logged_in_status"></div></li>
+          <li id="account_btn" class="main_nav_btn"><span>{{user.lastname}}</span></li>
+        {% else %}
+          <li id="active_login" class="logged_out main_nav_btn"><div id="logged_in_status"></div></li>
+          <li id="account_btn" class="main_nav_btn"><span><i id="account_icon" class="far fa-user"></i></span></li>
+      {% endif %}
+      
+      <li id="basket_btn" class="main_nav_btn">
+        <div id="basket_btn_wrapper">
+          <span><i class="fas fa-shopping-bag"></i></span>
+          <span id="basket_counter">{{ basket.count }}</span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+
+<!-- LOGIN -->
+
+    <div id="account_menu" class="cell entry_no_show">
+
+      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="nav_entry" class="callout text-center">
+
+        {% if user %}
+
+          <div class="button expanded" value="Account"><a href="{{ url_for('account.home') }}">Account</a></div>
+          <div class="button expanded"><a href="{{ url_for('auth.signout') }}">Log out</a></div>
+
+        {% else  %}
+          <h2>Log in to Account</h2>
+          <div class="floated-label-wrapper">
+            <label for="email">Email</label>
+            <input type="email" class="login_input" id="login_email" name="email" placeholder="Email" required>
+          </div>
+
+          <div class="floated-label-wrapper">
+            <label for="pass">Password</label>
+            <input type="password" class="login_input" required id="login_pass" name="password" placeholder="Password">
+          </div>
+
+          <div id="login_error_box">
+            <p id="login_error"></p>
+          </div>
+
+            <div id="login_btn" class="button expanded hidden_login_btn" onclick="" name="log_in">Log in</div>
+            <hr id="login_signup_breakline">
+            <div id="signup_btn" class="button expanded">
+              <a href="{{ url_for('auth.signup') }}">Sign-up</a>
+            </div>
+
+        {% endif %}
+      </form>
+
+    </div>
+    {# <div class="flash_header">
+      <small class="flash_message">flash message</small>
+    </div> #}
+
+<!--  SUGGESTION / SEARCH WRAPPER -->
+    <div id="suggest_bar_wrapper">
+      <p id="search_suggest">suggestions :</p>
+      <div>
+
+        <div id="suggest_wrapper">
+          {% include 'layouts/partials/searchProduct.twig' with {items: items} %}
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOREACH ITEM IN SESSION(BASKET) -->
+
+
+    <div id="basket">
+
+      {% for product in basket.all %}
+
+          {% include 'layouts/partials/basket_pane_product.twig' with {product : product} %}
+
+      {% endfor %}
+      {% if basket.count == 0 %}
+      <p>basket empty</p>
+      <div class="button nav_basket_btn" id="basket_nav_empty">go to basket</div>
+      {% else %}
+      <div class="button nav_basket_btn" id="basket_to_payment_btn"><a href="{{ url_for('basket') }}">go to basket</a></div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% include 'layouts/partials/flash.twig' %}
+
+  

@@ -1,0 +1,14 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+{# where we want to send data to #}
+<form action=" {{ url_for('contact') }}" method="post">
+
+    <input type="text" name="name" id="name">
+
+    <button type="submit">Send</button>
+
+</form>
+
+{% endblock %}

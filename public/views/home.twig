@@ -1,0 +1,105 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+
+
+
+<section class="hero grid-x" id="home_hero">
+
+    <img class="hero_img" id="home_hero_img" alt="man walking on white" src="/../../img/{{ collection.getImg }}"/>
+
+    <div class="hero_info" id="home_hero_info">
+    
+        <h2 class="hero_title">Nothing but a blank canvas</h2>
+
+        <h3 class="hero_slug">{{collection.getName}}</h3>
+
+        <p class="hero_text">Our new collection is nothing but a blank canvas, for you the customer to add and remove to manipulate to you style</p>
+
+        <button class="hero_cta_btn button">
+            <a href="#">see more</a>
+        </button>
+    
+    </div>
+
+
+</section>
+
+<section class="grid-x grid-container" id="home_about_clothing">
+
+    <div class="cell medium-6 small-12" id="home_about_clothing_blurb">
+
+        <h3>key to our brand</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
+
+    </div>
+
+    <div class="cell medium-6 small-12" id="home_about_clothing_features">
+
+        <div class="home_about_clothing_feature">
+            <i class="fab fa-cotton-bureau"></i>
+            <h4>unmeasured cotton</h4>
+        </div>
+
+        <div class="home_about_clothing_feature">
+            <i class="fas fa-search"></i>
+            <h4>quality seams</h4>
+        </div>
+
+        <div class="home_about_clothing_feature">
+            <i class="fas fa-puzzle-piece"></i>
+            <h4>wearable clothing</h4>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="grid-x grid-container" id="potw">
+
+    <div class="cell medium-6 small-12" id="potw_blurb">
+    
+        <h2>product of the week</h2>
+
+        <div id="potw_info">
+        
+            <h4 id="potw_name">Gernit Tee</h4>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+
+        </div>
+
+        
+
+    </div>
+
+    <div class="cell medium-6 small-12" id="potw_cta">
+    
+        <img src="https://via.placeholder.com/250"/>
+
+        <button class="button">
+        <a href="">go to</a>
+        </button>
+    
+    </div>
+
+</div>
+
+</section>
+
+<section class="banner" id="subscribe_banner">
+
+    <h3>subscribe</h3>
+
+    <div>
+        <input class="form_input" type="text">
+        <button class="input_label button">subscribe</button>
+    </div>
+
+</div>
+</section>
+
+
+
+
+{% endblock %}

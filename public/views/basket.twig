@@ -1,0 +1,67 @@
+{% extends 'layouts/app.twig' %}
+
+
+{% block content %}
+
+<div class="grid-x body_container cell small-11" id="basket_body">
+
+  {% set totalPrice = 0 %}
+
+    <div class="grid-x grid-margin-x cell" id="basket_wrapper">
+
+    {% for index,product in products %}
+
+      {# product element layout #}
+      {% include 'layouts/partials/Basket/product.twig' with { product : product, index: index } %}
+
+    {% endfor %}
+
+    </div>
+
+  <div class="checkout_pane" id="basket_checkout" class="cell">
+    
+    <div class="checkout_total" id="basket_total">
+
+      <table class="user_products_table" id="checkout_products_table">
+
+        {% for index,product in basket.all %}
+
+          <tr class="checkout_table_product" id="checkout_total_{{ index }}">
+            <td colspan="4" class="checkout_table_desc">{{ product.getName }}</td>
+            <td>x</td>
+            <td class="checkout_table_product_quantity"><strong>{{ product.quantity }}</strong></td>
+            <td>=</td>
+            <td class="checkout_table_currency">£</td>
+            {% set product_total = product.getPrice * product.quantity %}
+            <td class="checkout_table_price" id="product_{{index}}_total">{{ product_total|number_format('2', '.', ',') }}</td>
+          </tr>
+          <tr><td></td></tr>
+
+        {% endfor %}
+
+        {# <tr class="checkout_table_gap">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr> #}
+        <tr id="checkout_table_total" >
+          <td colspan="5"  class="checkout_table_desc">total:</td>
+          <td></td>
+          <td></td>
+          <td class="checkout_table_currency">£</td>
+          {% set basket_total = basket.getTotal + delivery_services[0].price %}
+          <td class="checkout_table_price" id="checkout_price">{{ basket_total|number_format('2', '.', ',') }}</td>
+        </tr>
+      </table>
+
+    <div id="payment_btns_wrapper">
+      <button class="button extended"> <a href="{{url_for('basket.checkout')}}">proceed to checkout</a></button>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

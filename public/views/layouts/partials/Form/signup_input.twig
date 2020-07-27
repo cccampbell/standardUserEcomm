@@ -1,0 +1,39 @@
+{% set type = '' %}
+
+{% if name == 'password'%}
+    {% set type = 'password' %}
+
+{% elseif name == 'verify_password'%}
+    {% set type = 'password' %}
+
+{% elseif name == 'email' %}
+    {% set type = 'email' %}
+
+{% else %}
+    {% set type = 'text' %}
+    
+{% endif %}
+
+
+<div class="floated-label-wrapper">
+
+    <div class="form_input_wrapper">
+
+        <input type="{{type}}" class="signup_input {{ error_array ? 'invalid_input' : '' }} {{ error_array == 'true' ? 'input_success' : '' }}" required id="signup_{{name}}" name="{{name}}" value="{{oldFormInput[name]}}">
+        <div class="signup_label">
+            <label for="{{name}}">{{name}}</label>
+        </div>
+
+    </div>
+
+    {% if error_array and error_array != 'true' %}
+        <div class="flash_input error">
+        {% for error in error_array %}
+                <small class="input_flash_message">{{error}}</small>
+        {% endfor %}
+
+        </div>
+    {% endif %}
+
+
+</div>
