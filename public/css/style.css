@@ -334,6 +334,7 @@ details summary {
   #account_menu form .floated-label-wrapper {
     margin: 1em auto; }
     #account_menu form .floated-label-wrapper .login_input {
+      width: 100%;
       border: 1px solid rgba(240, 240, 240, 0.7);
       background-color: rgba(240, 240, 240, 0.4);
       box-shadow: none;
@@ -1999,8 +2000,11 @@ details summary {
       height: fit-content;
       margin-bottom: 3em;
       position: relative;
-      background-color: #E8E8E8;
-      padding: 2em 2em; }
+      background-color: white;
+      padding: 2em 2em;
+      border-radius: 3px;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(240, 240, 240, 0.9); }
       .body_container #checkout_order_form .checkout_section #payment_option_buttons button {
         margin-right: 2em; }
       .body_container #checkout_order_form .checkout_section .checkout_section_header {
@@ -2183,10 +2187,14 @@ details summary {
       position: relative;
       padding: 0;
       margin: 0;
-      padding: 1.5em 0;
       height: fit-content;
-      border: 1px solid #b3b3b3;
-      text-transform: capitalize; }
+      text-transform: capitalize;
+      border: 1px solid rgba(230, 230, 230, 0.7);
+      background-color: rgba(240, 240, 240, 0.4);
+      box-shadow: none;
+      border-radius: 3px;
+      transition: all ease-in-out 0.2s;
+      padding: 1.5em 1em; }
       .floated-label-wrapper .form_input_wrapper .input_label label {
         position: absolute;
         display: flex;
@@ -2195,7 +2203,7 @@ details summary {
         right: 0;
         bottom: 0;
         font-size: calc(6px + 2 * ((100vw + 320px) / 680));
-        background-color: white;
+        background-color: black;
         align-items: center;
         justify-content: center;
         color: rgba(0, 0, 0, 0.5);
@@ -2209,10 +2217,14 @@ details summary {
       width: 70%;
       float: right;
       transition: all ease-in-out 0.2s;
-      border: 1px solid #b3b3b3;
       border-right: none;
       font-size: 12px;
-      padding: 1.5em; }
+      border: 1px solid rgba(230, 230, 230, 0.7);
+      background-color: rgba(240, 240, 240, 0.4);
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.02);
+      border-radius: 3px;
+      transition: all ease-in-out 0.2s;
+      padding: 1.5em 1em; }
       .floated-label-wrapper .form_input_wrapper input:hover, .floated-label-wrapper .form_input_wrapper input:focus {
         width: 100%;
         border: 1px solid #4f95e2; }
@@ -2223,7 +2235,17 @@ details summary {
             color: #4f95e2;
             font-size: calc(6px + 1 * ((100vw + 320px) / 680)); }
     .floated-label-wrapper .form_input_wrapper select {
-      border: 1px solid #b3b3b3; }
+      border: 1px solid rgba(240, 240, 240, 0.7); }
+      .floated-label-wrapper .form_input_wrapper select:hover, .floated-label-wrapper .form_input_wrapper select:focus {
+        width: 100%;
+        border: 1px solid #4f95e2;
+        box-shadow: none; }
+        .floated-label-wrapper .form_input_wrapper select:hover + .input_label, .floated-label-wrapper .form_input_wrapper select:focus + .input_label {
+          border: 1px solid #4f95e2;
+          border-left: none; }
+          .floated-label-wrapper .form_input_wrapper select:hover + .input_label label, .floated-label-wrapper .form_input_wrapper select:focus + .input_label label {
+            color: #4f95e2;
+            font-size: calc(6px + 1 * ((100vw + 320px) / 680)); }
     .floated-label-wrapper .form_input_wrapper .invalid_input {
       border: 1px solid #ff002b; }
       .floated-label-wrapper .form_input_wrapper .invalid_input + .input_label {

@@ -17,8 +17,19 @@
         {% for sort in sort_arr %}
 
           <div class="pane_btn sort_btns" name="sort_{{ sort }}"> 
-            <input id="sort_{{ sort }}" name="sort" value="{{ sort }}" type="radio" class="radio_sort">
+
+            {% if sort in filters['sort'] %}
+
+              <input checked id="sort_{{ sort }}" name="sort" value="{{ sort }}" type="radio" class="radio_sort">
+
+            {% else %}
+
+              <input id="sort_{{ sort }}" name="sort" value="{{ sort }}" type="radio" class="radio_sort">
+
+            {% endif %}
+
             <label for="sort_{{ sort }}" class="sort_btn_label">{{ sort }}<i class="fas fa-arrow-down"></i></label>
+
           </div>
 
         {% endfor %}
@@ -45,7 +56,7 @@
               
             {% else %}
                 {# IF CHECKBOX SAME AS FILTER CHECK IT #}
-              {% if collection.slug in filters %}
+              {% if collection.slug in filters['collection'] %}
 
                 <div>
                   <div>
@@ -86,7 +97,7 @@
               
               {% else %}
                 {# IF CHECKBOX SAME AS FILTER CHECK IT #}
-                {% if category.slug in filters %}
+                {% if category.slug in filters['category'] %}
 
                   <div><div><input checked type="checkbox" class="filter_input" value="{{ category.slug }}" name="checkbox_filter[]"><label>{{ category.name }}</label></div></input><p>({{ category.count }})</p></div>
                 

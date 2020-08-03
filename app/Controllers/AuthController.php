@@ -84,7 +84,9 @@ class AuthController extends Controller {
     public function postSignin(Request $request, Response $response) {
 
         $data = $request->getParsedBody();
-
+        // die(var_dump($_SERVER['HTTP_REFERER']));
+        
+        // die(var_dump($request->getUri()));
         $validation = $this->container->get('validator')->validate($data, [
             'email' => ['emailFormat'],
             'password' => ['lengthMinMedium']
@@ -101,15 +103,25 @@ class AuthController extends Controller {
 
         // use input to check whether to authorise
         try {
+            // die($data['email'] . ' ' .$data['password']);
             $check = $this->container->get('auth')->check($data['email'], $data['password']);
             
         } catch(InvalidSigninDetails $e) {
-            
+
+            // use previous url to get route
+            preg_match('/:\d{0,}(\/\w+)/m', $_SERVER['HTTP_REFERER'], $match);
+            $route = $match[1];
+            if($route === NULL) {
+                $route = '/';
+            }
+
             $_SESSION['flash']['failed'] = $e->getMessage();
 
+            // die(var_dump($_SESSION['flash']));
+            // die($e->getMessage());
             return $response
-            ->withHeader('Location', '/signin')
-            ->withStatus(302);
+            ->withHeader('Location', $route)
+            ->withStatus(401);
         }
 
         // SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1 

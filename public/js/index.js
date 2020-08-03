@@ -46,6 +46,10 @@ function spinner() {
 function logInUser(form) {
   with(form) {
 
+    
+    // console.log(form);
+    // return;
+
     console.log("work work work");
     var email = document.getElementById('login_email').value;
     var pass = document.getElementById('login_pass').value;
@@ -70,7 +74,7 @@ function logInUser(form) {
 
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/entry2.php', true);
+    xhr.open('POST', '/signin', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     //console.log(email + " " + pass);
@@ -79,7 +83,6 @@ function logInUser(form) {
 
       if (xhr.status === 200 && xhr.readyState === 4) {
 
-        console.log(xhr.responseText + " hello response");
         //check whether what was passed starts with 'null'
         let check = xhr.responseText.slice(0,4);
         let account_menu = document.getElementById('account_menu');
@@ -98,6 +101,9 @@ function logInUser(form) {
               account_menu.classList.toggle('login_error');
 
             } else {
+
+              console.log(xhr.response);
+              return;
 
               //method to add html to #nav_entry // for now
               document.getElementById("account_btn").innerHTML = '<a href="#"><i class="fi-list"></i><span>'+ xhr.responseText +'</span></a>';
@@ -248,7 +254,10 @@ function selectedFilters() {
   let checkboxesChecked = [];
   let sort = document.getElementsByName('sort');
   let sort_value = '';
-  let checked = [];
+  let checked = {
+    collection : [],
+    category : [],
+  };
 
   let endurl = '';
 
@@ -258,76 +267,116 @@ function selectedFilters() {
   for(i = 0; i < sort.length; i++) {
     if(sort[i].checked) {
       // console.log(sort[i].value);/
-      sort_value = sort[i].value;
+      sort_value = '&sort=' + sort[i].value;
     }
   }
   
   // iterate through to see if any filters selcted
   for (var i = 0; i < checkboxes.length; i++) {
 
+    let filter = [];
+
     // IF checked box checked
     if (checkboxes[i].checked) {
         
       let type = checkboxes[i].parentNode.parentNode.parentNode.id.split('_')[0];
 
-      if(!checked.includes(type)) {
+      checked[type].push(checkboxes[i].value);
 
-        checked.push(type , '/');
+    }
+    
+  }
 
+  route = '';
+  typeCounter = 0;
+
+  // go through object
+  for(let type in checked) {
+
+    if(checked[type].length !== 0) {
+
+      if(typeCounter > 0) {
+        route += '&'
       }
 
-      checked.splice(checked.indexOf(type) + 1, 0, ...['|',checkboxes[i].value]);
+      route += type + '=';
+
+
+      for (let filtered in checked[type]) {
+
+
+        route += checked[type][filtered] + '+';
+      }
+
+      route = route.slice(0, -1);
+      typeCounter += 1;
+
     }
+
+
   }
 
-  param = checked.join('');
+
+  endurl = route + sort_value;
+
+  // console.log(queryString.slice(0, 1).join('/') + '/filter/' + endurl);
+  window.location.href = '/products/filter/' + endurl;
+  // window.location.href = window.location.pathname + '/filter/' + endurl;
+
+  
+  // check to see if not empty
+    // if not - get key and join as param for each
+
+  // param = checked.join('');
 
 
-  // check to see if 'category' && 'filter' there, if so, filter down products from there
-  $indexEl = queryString.indexOf('category');
-  $indexFil = queryString.indexOf('filter');
+  // // check to see if 'category' && 'filter' there, if so, filter down products from there
+  // $indexEl = queryString.indexOf('category');
+  // $indexFil = queryString.indexOf('filter');
 
-  if($indexEl !== -1) {
+  // if($indexEl !== -1) {
 
-    queryString.splice(0,$indexEl+1);
+  //   queryString.splice(0,$indexEl+1);
 
-  }
+  // }
   
 
-  // is filter 
-  if( queryString.indexOf('filter') !== -1 ) {
+  // // is filter 
+  // if( queryString.indexOf('filter') !== -1 ) {
 
-    let newurl = window.location.pathname.split('/');
-    newurl.splice(newurl.indexOf('filter') + 1);
+  //   let newurl = window.location.pathname.split('/');
+  //   newurl.splice(newurl.indexOf('filter') + 1);
 
-    console.log(param);
+  //   console.log(param);
 
-    console.log( newurl.join('/').concat('/' + param) );
+  //   console.log( newurl.join('/').concat('/' + param) );
 
-    endurl = newurl.join('/').concat('/' + param);
+  //   endurl = newurl.join('/').concat('/' + param);
 
-    // window.location.href = (newurl.join('/')).concat('/' + param);
+  //   // window.location.href = (newurl.join('/')).concat('/' + param);
 
-  }
-  // // no filter
-  else {
+  // }
+  // // // no filter
+  // else {
 
-    console.log( window.location.pathname + '/filter/' + param )
+  //   console.log( window.location.pathname + '/filter/' + param )
 
-    endurl = window.location.pathname + '/filter/' + param;
+  //   endurl = window.location.pathname + '/filter/' + param;
 
-  }
+  // }
 
-  endurl = endurl.slice(0, -1);
+  // console.log(endurl);
 
-  if( sort_value !== '' ) {
+  // endurl = endurl.slice(0, -1);
 
-    window.location.href = endurl + '/sort/'  + sort_value;
+  // if( sort_value !== '' ) {
 
-  } else {
+  //   window.location.href = endurl + '/sort/'  + sort_value;
 
-    window.location.href = endurl;
-  }
+  // } else {
+
+  //   // window.location.href = endurl;
+  // }
 
 
 }

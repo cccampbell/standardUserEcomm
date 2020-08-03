@@ -18,11 +18,11 @@
 
                         <div clas="checkout_inputs_wrapper">
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'firstname', error_array: errors['validate_errors'].firstname} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'firstname', error_array: errors['validate_errors'].firstname} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'lastname', error_array: errors['validate_errors'].lastname} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'lastname', error_array: errors['validate_errors'].lastname} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'email', error_array: errors['validate_errors'].email} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'email', error_array: errors['validate_errors'].email} %}
                         
                         </div>
                     
@@ -34,19 +34,19 @@
 
                         <div class="checkout_inputs_wrapper">
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'firstline', error_array: errors['validate_errors'].firstline} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'firstline', error_array: errors['validate_errors'].firstline} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'secondline', error_array: errors['validate_errors'].secondline} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'secondline', error_array: errors['validate_errors'].secondline} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'town', error_array: errors['validate_errors'].town} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'town', error_array: errors['validate_errors'].town} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'city', error_array: errors['validate_errors'].city} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'city', error_array: errors['validate_errors'].city} %}
 
                             {# {% include 'layouts/partials/Form/input.twig' with {name: 'country', error_array: errors['validate_errors'].country} %} #}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'postcode', error_array: errors['validate_errors'].postcode} %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'postcode', error_array: errors['validate_errors'].postcode} %}
 
-                            {% include 'layouts/partials/Form/input.twig' with {name: 'country', error_array: errors['validate_errors'].country, data: countries } %}
+                            {% include 'layouts/partials/Form/input.twig' with {fullInput: true, name: 'country', error_array: errors['validate_errors'].country, data: countries } %}
 
                             
                             {# once continue to payment -> height 0 & overflow hidden for order info #}
@@ -65,13 +65,17 @@
 
                 <div id="postage_wrapper">
                     <label>choose postage:</label>
-                    <select id="postage_dropdown" name="postage">
-                        {% for delivery in delivery_services %}
-                            {# debug - location converts to correct price and correct currency sign  #}
-                            <option value="{{ delivery.id }}">{{delivery.name}} : £{{ delivery.price|number_format('2', '.', ',') }}</option>
+                    <div class="floated-label-wrapper">
+                        <div class="form_input_wrapper">
+                            <select id="postage_dropdown" name="postage">
+                                {% for delivery in delivery_services %}
+                                    {# debug - location converts to correct price and correct currency sign  #}
+                                    <option value="{{ delivery.id }}">{{delivery.name}} : £{{ delivery.price|number_format('2', '.', ',') }}</option>
 
-                        {% endfor %}
-                    </select>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 

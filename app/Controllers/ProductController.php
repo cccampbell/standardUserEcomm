@@ -28,8 +28,6 @@ class ProductController extends Controller  {
 
         $products = $this->container->get('productDS')->getAllGarmData( $args['slug'] );
 
-        // die(print_r($products));
-
 
         return $this->container->get('view')->render($response, 'product.twig', [
             'products' => $products,
@@ -42,8 +40,6 @@ class ProductController extends Controller  {
 
         $products = $this->container->get('productDS')->getInStockProducts();
 
-        // print_r($products);
-
         return $this->container->get('view')->render($response, 'products.twig', [
             'products' => $products,
             'count' => count($products)
@@ -53,8 +49,12 @@ class ProductController extends Controller  {
 
     public function showTypeProducts(Request $request, Response $response, $args) {
 
-        $products = $this->container->get('productDS')->getTypeProducts($args['type'], $args['slug']);
+        // $param = $args['slug'];
 
+        $type = explode('|', $param)[0];
+
+
+        $products = $this->container->get('productDS')->getTypeProducts($type, $args['slug']);
 
 
         return $this->container->get('view')->render($response, 'products.twig', [
@@ -69,13 +69,11 @@ class ProductController extends Controller  {
 
         $filters = explode('/', $args['params']);
 
-        // print_r($filters);
-
 
         $products = $this->container->get('productDS')->filterCategory($args['slug'], $filters);
 
 
-        return $this->view->render($response, 'products.twig', [
+        return $this->container->get('view')->render($response, 'products.twig', [
             'products' => $products,
             'args' => $args,
             'count' => count($products),
@@ -93,7 +91,7 @@ class ProductController extends Controller  {
         $products = $this->container->get('productDS')->filterCollection($args['slug'], $filters);
 
 
-        return $this->view->render($response, 'products.twig', [
+        return $this->container->get('view')->render($response, 'products.twig', [
             'products' => $products,
             'args' => $args,
             'count' => count($products),
@@ -106,14 +104,17 @@ class ProductController extends Controller  {
 
         $filters = explode('/', $args['params']);
 
-        $products = $this->container->get('productDS')->filterProducts($filters, $args['sort']);
+        $param_arr = $this->container->get('util')->getArrayFromUrl($filters[0]);
 
+        $products = $this->container->get('productDS')->filterProducts($param_arr);
 
-        return $this->view->render($response, 'products.twig', [
+        
+
+        return $this->container->get('view')->render($response, 'products.twig', [
             'products' => $products,
             'args' => $args,
             'count' => count($products),
-            'filters' => $filters
+            'filters' => $param_arr
         ]);
 
     }
@@ -143,7 +144,7 @@ class ProductController extends Controller  {
 
         // print_r($suggest);
 
-        return $this->view->render($response, 'layouts/partials/searchProduct.twig', [
+        return $this->container->get('view')->render($response, 'layouts/partials/searchProduct.twig', [
             'suggest' => $suggest,
         ]);
 

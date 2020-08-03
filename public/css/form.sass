@@ -15,10 +15,16 @@
             position: relative
             padding: 0
             margin: 0
-            padding: 1.5em 0
+            // padding: 1.5em 0
             height: fit-content
-            border: 1px solid $light_grey
+            // border: 1px solid $light_grey
             text-transform: capitalize
+            border: 1px solid hsla(0,0%,90%,0.7)
+            background-color: hsla(0,0%,94%,0.4)
+            box-shadow: none
+            border-radius: $box_radius
+            transition: $transition
+            padding: 1.5em 1em 
             label
                 position: absolute
                 display: flex
@@ -27,7 +33,7 @@
                 right: 0
                 bottom: 0
                 font-size: calc(6px + 2 * ((100vw + 320px) / 680))
-                background-color: white
+                background-color: black
                 align-items: center
                 justify-content: center
                 color: rgba(0, 0, 0, 0.5)
@@ -42,10 +48,14 @@
             width: 70%
             float: right
             transition: $transition
-            border: 1px solid $light_grey
             border-right: none
             font-size: 12px
-            padding: 1.5em
+            border: 1px solid hsla(0,0%,90%,0.7)
+            background-color: hsla(0,0%,94%,0.4)
+            box-shadow: $box_shadow
+            border-radius: $box_radius
+            transition: $transition
+            padding: 1.5em 1em 
             &:hover, &:focus
                 width: 100%
                 border: 1px solid $signup
@@ -56,7 +66,18 @@
                         color: $signup
                         font-size: calc(6px + 1 * ((100vw + 320px) / 680))
         select
-            border: 1px solid $light_grey
+            border: 1px solid hsla(0,0%,94%,0.7)
+            &:hover, &:focus
+                width: 100%
+                border: 1px solid $signup
+                box-shadow: none
+                + .input_label
+                    border: 1px solid $signup
+                    border-left: none
+                    label
+                        color: $signup
+                        font-size: calc(6px + 1 * ((100vw + 320px) / 680))
+            
         .invalid_input
             border: 1px solid $error
             + .input_label

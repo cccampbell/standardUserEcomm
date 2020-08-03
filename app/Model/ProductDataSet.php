@@ -223,7 +223,7 @@ class ProductDataSet {
     $statement->execute($ids);
 
     while( $row = $statement->fetch(PDO::FETCH_ASSOC) ) {
-      
+
       $products[] = new ProductData($row);
 
     }
@@ -415,11 +415,37 @@ class ProductDataSet {
   //    FILTER AND SORT
   // //////
 
+  public function createQuerySort(string $sort) {
+
+    $sort = strtolower($sort);
+
+    // EMPTY SORTING QUERY
+    $sorting;
+        // CREATE SORTING QUERY
+    if($sort === 'high') {
+
+      $sorting = " ORDER BY price DESC;";
+
+    } elseif($sort === 'low') {
+
+      $sorting = " ORDER BY price ASC;";
+
+    } else {
+
+      $sorting = "";
+
+    }
+
+    return $sorting;
+
+  }
+
   // takes 2 param ( 1. slug of type 2. number of filters for type )
   public function createQueryType($slug, int $length) {
 
-    $query = "";
+    $slug = strtolower($slug);
 
+    $query = "";
     
     // creates # of placeholders '?' for query with given length
     $placeholder = str_repeat('?,', $length - 1) . '?';
@@ -428,16 +454,16 @@ class ProductDataSet {
     // check to see given $slug type
     switch ($slug) {
       case 'category':
-        $query = "categories.slug IN ($placeholder)";
+        $query = " categories.slug IN ($placeholder)";
         break;
       case 'collection':
-        $query = "collections.slug IN ($placeholder)";
+        $query = " collections.slug IN ($placeholder)";
         break;
       case 'colours':
-        $query = "colours.name IN ($placeholder)";
+        $query = " colours.name IN ($placeholder)";
         break;
       case 'size':
-        $query = "stock.size IN ($placeholder)";
+        $query = " stock.size IN ($placeholder)";
         break;
       default:
         throw new NoSlugMatch;
@@ -450,41 +476,72 @@ class ProductDataSet {
     return $query;
   }
 
-  public function filterProducts($filters, $sort) {
+  public function filterProducts(array $filters) {
 
-    // EMPTY SORTING QUERY
-    $sorting;
-        // CREATE SORTING QUERY
-    if($sort === 'high') {
-      $sorting = " ORDER BY price DESC;";
-    } elseif($sort === 'low') {
-      $sorting = " ORDER BY price ASC;";
-    } else {
-      $sorting = "";
+    // array for all cat / coll slugs to go into 
+    $filter_slugs = [];
+    $sorting = '';
+
+    if($filters['sort']) {
+
+      $sort = $filters['sort'][0];
+      // take sort out of array so just left with cat and coll
+      // do sort seperatly
+      unset($filters['sort']);
+
+      $sorting = $this->createQuerySort($sort);
+
+    }
+    
+
+    $query = "SELECT DISTINCT products.id as id, garments.name, garments.id as garm_id, garments.desc, products.img, products.price as price, products.slug, products.colour_id, colours.name as colour, colours.hex, SUM(product_order_stock_view.quantity) AS total_stock 
+              FROM stock 
+              INNER JOIN products ON stock.product = products.id 
+              INNER JOIN garments ON products.garment_id = garments.id 
+              INNER JOIN colours ON products.colour_id = colours.id 
+              INNER JOIN product_category ON products.id = product_category.product_id 
+              INNER JOIN collection_products ON products.id = collection_products.product_id 
+              INNER JOIN categories ON product_category.category_id = categories.id 
+              INNER JOIN collections ON collection_products.collection_id = collections.id
+              INNER JOIN product_order_stock_view ON stock.id = product_order_stock_view.id
+              WHERE ";
+
+    // go through each k use k to get k's query, and add all v's to array of filters for query later
+    foreach ($filters as $key => $value) {
+
+      if(array_key_last($filters) == $key) {
+
+        $query .= $this->createQueryType($key, count($value));
+
+      } else {
+
+        $query .= $this->createQueryType($key, count($value)) . ' AND';
+
+      }
+
+      array_push($filter_slugs, ...$value);
+
     }
 
-    print_r($filters);
+    $query .= ' GROUP BY products.colour_id, products.id ' . $sorting;
 
-
-    $params  = str_repeat('?,', count($filters) - 1) . '?';
-
-    $query = "SELECT product_id FROM product_category
-              INNER JOIN categories
-              ON product_category.category_id = categories.id
-              WHERE categories.slug IN ($params)" . $sorting;
 
     $statement  = $this->_dbHandle->prepare($query);
 
     //BIND PARAMS IN QUERY(? = S) TO THE ARRAY OF PRODUCT_ID (...$ARRAY = {[1][2] === 1,2})
-    $statement->execute($filters);
+    $statement->execute($filter_slugs);
 
     $ids = [];
+    $products = [];
 
     while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-      $ids[] = $row['product_id'];
+      // var_dump($row);
+      // var_dump('<br>');
+      // $ids[] = $row['id'];
+      $products[] = new ProductData($row);
     }
 
-    return $this->getProducts($ids);
+    return $products;
 
   }
 

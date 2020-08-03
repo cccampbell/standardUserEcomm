@@ -28,13 +28,13 @@ $app->get('/products/{slug}', ProductController::class . ':show')->setName('prod
 //  all products page
 $app->get('/products', ProductController::class . ':showAllInStock')->setName('product.showAll');
 
+// filter products 
+$app->get('/products/filter/{params:.*}', ProductController::class . ':filterProducts')->setName('products.filter');
+
 //  search products
 $app->get('/products/search/{str}', ProductController::class . ':search')->setName('products.search');
 
 $app->get('/products/{type}/{slug}', ProductController::class . ':showTypeProducts')->setName('type.show');
-
-// filter products 
-$app->get('/products/filter/{params:.*}[/sort/{sort}]', ProductController::class . ':filterProducts')->setName('products.filter');
 
 // filter categories
 $app->get('/products/category/{slug}/filter/{params:.*}', ProductController::class . ':filterCategory')->setName('category.filter');

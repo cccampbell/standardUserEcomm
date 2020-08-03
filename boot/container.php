@@ -4,23 +4,24 @@ use PDO;
 
 use DI\Container;
 use App\Model\App;
+use App\Util\Util;
 use App\Model\Entry;
 use App\Model\Order;
 use App\Model\Basket;
 use App\Model\Database;
+
 use Slim\Flash\Messages;
-
 use App\Location\Location;
-use App\Model\ProductData;
 
+use App\Model\ProductData;
 use DI\Bridge\Slim\Bridge;
 use Slim\Factory\AppFactory;
 use App\Model\AccountDataSet;
 use App\Model\ProductDataSet;
 use App\Validation\Validator;
 use App\Model\CustomerDataSet;
-use App\Authentication\AuthParser;
 
+use App\Authentication\AuthParser;
 use App\Authentication\AuthFactory;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
@@ -134,6 +135,10 @@ $container->set('customerDS', function ($container) {
 // UTIL 
 $container->set('location', function ($container) {
     return new Location;
+});
+
+$container->set('util', function ($container) {
+    return new Util;
 });
 
 

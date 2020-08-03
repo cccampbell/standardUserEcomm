@@ -55,7 +55,7 @@
 
     <div id="account_menu" class="cell entry_no_show">
 
-      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="nav_entry" class="callout text-center">
+      <form action="{{ url_for('auth.signin') }}" method="post" id="nav_entry" class="callout text-center">
 
         {% if user %}
 
@@ -64,21 +64,26 @@
 
         {% else  %}
           <h2>Log in to Account</h2>
-          <div class="floated-label-wrapper">
+
+          {% include 'layouts/partials/Form/input.twig' with {fullInput: false ,name: 'email', error_array: errors['validate_errors'].email} %}
+
+          {% include 'layouts/partials/Form/input.twig' with {fullInput: false ,name: 'password', error_array: errors['validate_errors'].password} %}
+
+          {# <div class="floated-label-wrapper">
             <label for="email">Email</label>
             <input type="email" class="login_input" id="login_email" name="email" placeholder="Email" required>
           </div>
 
           <div class="floated-label-wrapper">
             <label for="pass">Password</label>
-            <input type="password" class="login_input" required id="login_pass" name="password" placeholder="Password">
-          </div>
+            <input type="password" class="login_input" required id="login_pass" name="password" placeholder="Password"> #}
+          {# </div> #}
 
           <div id="login_error_box">
             <p id="login_error"></p>
           </div>
 
-            <div id="login_btn" class="button expanded hidden_login_btn" onclick="" name="log_in">Log in</div>
+            <input type="submit" name="submit" id="login_btn" value="log in" class="button expanded hidden_login_btn">
             <hr id="login_signup_breakline">
             <div id="signup_btn" class="button expanded">
               <a href="{{ url_for('auth.signup') }}">Sign-up</a>
