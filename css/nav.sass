@@ -1,0 +1,388 @@
+#nav
+  width: 100vw
+  height: 10vh
+  align-content: center
+  margin: 0 auto
+  text-transform: lowercase
+  background: rgba(255,255,255, 1)
+  position: fixed
+  border-bottom: 1px solid grey
+  padding: 0 1em
+  display: flex
+  flex-direction: row
+  z-index: 1000
+  @media screen and (max-width: 500px)
+    padding-left: 0
+  #navbar_wrapper
+    width: 100%
+    display: flex
+    // border: 1px solid black
+    height: 100%
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: space-around
+    #nav-left , #nav-right
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      list-style: none
+      // border: 1px solid blue
+      align-items: center
+      justify-content: space-around
+      height: 100%
+      margin-left: 0
+      .main_nav_btn
+        height: 100%
+        display: flex
+        justify-content: center
+        border-bottom: none
+        transition: $transition
+        // border: $dark_border
+        flex: 1
+        align-self: center
+        text-align: center
+        a
+          align-self: center
+          color: rgba(0, 0, 0, 0.7)
+          &:hover
+            color: rgba(0, 0, 0, 0.8)
+          span
+            font-size: calc(10px + 2 * ((100vw - 320px) / 680))
+          svg
+            display: none
+            align-self: center
+            font-size: calc(4px + 2 * ((100vw - 320px) / 680))
+        span
+          justify-content: center
+          align-self: center
+          font-family: Roboto, Sans-Serif
+          color: rgba(0, 0, 0, 0.7)
+          font-size: calc(10px + 2 * ((100vw - 320px) / 680))
+          &:hover
+            cursor: pointer
+
+    #nav-left
+      color: black
+      #nav_shop_btn
+        &:hover
+          #nav_shop_link_list
+            display: flex !important
+        #nav_shop_link_list
+          display: none
+          position: absolute
+          top: 10vh
+          width: 100vw
+          left: 0 !important
+          height: 30vh
+          background: rgba(255,255,255, 0.99)
+          flex-direction: row
+          justify-content: flex-start
+          overflow: hidden
+          border-bottom: 1px solid grey
+          align-items: center
+          ul
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            padding-right: 3em
+            border-right: 1px solid grey
+            width: auto
+            height: 80%
+            // background-color: pink
+            // height: 100%
+            align-items: flex-start
+            margin-left: 3em
+            .category_link
+              margin-top: 1em
+              float: left
+              height: auto
+              a
+                color: rgba(0,0,0,0.8)
+                position: relative
+                // padding-right: 0
+                &:hover
+                  cursor: pointer
+                  color: rgba(0,0,0,1)
+                span
+                  font-size: calc(9px + 2 * ((100vw - 320px) / 680))
+          #garment_nav_list
+            display: flex
+            flex-direction: row 
+            flex-wrap: nowrap
+            .collection_column
+              display: flex
+              flex-direction: column
+              margin-right: 0.5em
+        @media screen and (max-width: 710px)
+          align-self: flex-start
+          padding-bottom: 3em
+          height: auto
+
+        #nav_shop_link_list
+          // display: none
+          @media screen and (max-width: 710px)
+            display: flex
+            flex-direction: column
+            margin-top: 2em
+            margin-left: -2.5em !important
+            justify-content: space-around
+            align-items: flex-start
+          li
+            color: grey
+            display: flex
+            flex-direction: row
+            a
+              display: flex
+              flex-direction: row
+              flex-wrap: nowrap
+              svg
+                display: block
+                margin-right: 1em
+        &::after
+          @media screen and (max-width: 710px)
+            margin: 0
+                
+
+    #nav_menu
+      display: none
+      @media screen and (max-width: 710px)
+        font-size: 25px
+        display: block
+        align-self: center
+        margin: auto 1em
+        cursor: pointer
+
+    
+
+
+// MOBILE NAVIGATION
+@media screen and (max-width: 710px)
+  .nav_responsive_show
+    top: 10vh
+    left: 0 !important
+    padding-left: 2em
+    height: 100%
+    width: 80vw !important
+    background: rgba(255,255,255, 0.99)
+    z-index: 10
+    list-style: none
+    border-right: 1px solid black
+    box-shadow: 20vw 0 1px 0 rgba(0,0,0, 0.5)
+    padding-top: 1em
+    transition: all ease-in-out 0.5s
+  #nav-left
+    display: flex
+    left: -100vw
+    position: fixed
+    transition: all ease-in-out 0.4s
+    align-items: center
+    justify-content: flex-start !important
+    flex-direction: column !important
+    .main_nav_btn
+      align-self: flex-start !important
+      height: auto
+      flex: 0 !important
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      margin-bottom: 1em
+      width: 90%
+      justify-content: flex-start !important
+      border-bottom: 1px solid lightgrey !important
+      padding-bottom: 1em
+      height: auto
+      text-align: center
+      a
+        padding-left: 0
+        align-self: flex-start !important
+        text-align: flex-start
+        color: black
+        svg
+          display: flex
+    #nav_shop_btn
+      padding-bottom: 1em !important
+      #nav_shop_link_list
+        position: relative !important
+        top: 0 !important
+        width: 100% !important
+        border-bottom: none !important
+        // flex-direction: row !important
+        height: auto !important
+        justify-content: flex-start !important
+        background-color: rgba(255, 255, 255, 0) !important
+        ul
+          border-right: none !important
+          width: auto !important
+          height: auto !important
+          padding: 0 !important
+          margin: 0 !important
+          margin-left: 1em !important
+        #garment_nav_list
+          flex-direction: column !important
+  #suggest_bar_wrapper
+    #search_suggest
+        width: 100% !important
+        text-align: left !important
+        margin-left: 1em !important
+        padding-top: 0 !important
+    div
+      overflow-x: scroll
+      flex-direction: column !important
+      #suggest_wrapper
+        overflow: hidden
+        width: auto !important
+        flex-direction: row !important
+        position: absolute !important
+        left: 0
+        .suggestion
+          height: auto !important
+          overflow: hidden !important
+          margin: 0 !important
+          width: 11em !important
+          font-size: auto !important
+          a
+            img
+              height: 12em !important
+      
+
+
+
+
+// SEARCH BAR
+
+#searchbar
+  // flex-grow: 4
+  // border: 1px solid green
+  margin-right: 2em
+.searchbar
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  align-items: center
+  // margin-top: -0.25em
+  // margin-left: 1.5em
+  justify-content: flex-end
+  .searchbar_btn
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: white
+    z-index: 2
+    position: relative
+    // FIX BUG - CAN CLICK ON ICON WRAPPER, NOTHING HAPPENS
+    .searchbar_icon
+      color: rgba(0, 0, 0, 0.7)
+      display: flex
+      flex: 1
+      font-size: 14px
+      margin: 0.5rem
+      position: relative
+      &:hover
+        color: $btn_color
+  #search_product
+    display: none
+    &:hover
+      svg
+        color: $success
+  .search_bar_opened
+    display: flex !important
+
+  #nav_search
+    height: 2.75rem
+    transition: $transition
+    width: 1px
+    opacity: 0
+    padding: 0
+    box-shadow: none
+    border: none
+    border-bottom: 1px solid #b3b3b3
+    @media screen and (max-width: $break-phablet)
+      position: absolute
+      top: 0
+      left: 0
+      width: 10vw
+      height: 10vh
+      z-index: -1
+#suggest_bar_wrapper
+  display: flex
+  position: absolute
+  width: 100vw
+  top: -100vh
+  left: 0
+  background-color: $smoke_white
+  flex-direction: column
+  justify-content: center
+  padding-top: 1em
+  padding-bottom: 1em
+  border-bottom: $normal_border
+  z-index: 0
+  transition: $transition
+  transition: box-shadow 0.3s linear 0.2s
+  #search_suggest
+      text-align: center
+      width: 20%
+      padding-top: 1em
+      margin-bottom: 0
+      font-size: 16px
+      align-self: flex-start
+      text-transform: uppercase
+  div
+    position: relative
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    align-items: center
+    width: 100%
+    height: 100%
+    #suggest_wrapper
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      width: 70%
+      .suggestion
+        display: flex
+        font-size: 14px
+        margin: 0 1em
+        width: 11em !important
+        margin-right: 0
+        justify-content: center
+        padding-top: 1em
+        padding-bottom: 1em
+        position: relative
+        transition: $transition
+        a
+          width: 100%
+          height: 100%
+          padding: 0
+          margin: 0
+          display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
+          img
+            position: relative
+            width: 90%
+            border: $dark_border
+            height: 12em
+            margin-bottom: 0.5em
+          p
+            margin-bottom: 0
+            text-align: center
+            color: black
+            font-size: calc(10px + 4 * ((100vw - 320px) / 680))
+            &:hover
+              
+
+#active_login
+  align-items: center
+  #logged_in_status
+    border: 2px solid
+    color: black
+    height: 1rem
+    width: 1rem
+    border-radius: 50%
+
+.logged_in
+  #logged_in_status
+    border-color: green !important
