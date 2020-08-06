@@ -10,10 +10,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $env = include(__DIR__ . '/../env.php');
 
-
-
 require 'container.php';
-
 
 // create application
 $app = AppFactory::create();

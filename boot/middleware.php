@@ -39,7 +39,7 @@ $app->add($errorMiddleware);
 
 // set view in container
 $container->set('view', function () {
-    return Twig::create('views', [
+    return Twig::create('resources/views', [
         'cache' => false,
         'globals' => [
             // 'basket' => Basket::class,
