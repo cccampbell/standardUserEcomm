@@ -4,16 +4,18 @@ namespace App\Model;
 
 use PDO;
 
+$env = include(__DIR__ . '/../env.php');
+
 class Database {
   protected static $_dbInstance = null; //static instance
   protected $_dbHandle;
-  
 
   public static function getInstance() {
-    $host = "localhost";
-    $dbName = "work";
-    $username = "root";
-    $password = "root";
+    
+    $host = $env['DB_HOST'];
+    $dbName = $env['DB_NAME'];
+    $username = $env['DB_USERNAME'];
+    $password = $env['DB_PASSWORD'];
     
   if(self::$_dbInstance === null) { //checked whether PDO exists
     //creates new single instance, if one already sends info

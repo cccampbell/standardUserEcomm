@@ -1,0 +1,15 @@
+# Dont track these
+env.php
+
+
+# Complied Source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+.env
+*.so
+.idea
+.vscode

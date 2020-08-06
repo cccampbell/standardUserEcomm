@@ -11,5 +11,6 @@ return array(
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'work',
     'DB_USERNAME' => 'root',
-    'DB_PASSWORD' => 'root'
+    'DB_PASSWORD' => 'root',
+    
 );
