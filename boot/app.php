@@ -8,7 +8,7 @@ session_start();
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$env = include(__DIR__ . '/../config/env.php');
+$env = include(__DIR__ . '/../env.php');
 
 
 
